@@ -29,5 +29,4 @@ public class UserPermissionVo {
      */
     Set<String> roles;
 
-    private String supplierCode;
 }

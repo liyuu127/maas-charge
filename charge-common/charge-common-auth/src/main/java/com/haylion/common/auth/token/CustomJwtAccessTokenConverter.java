@@ -34,7 +34,6 @@ public class CustomJwtAccessTokenConverter extends JwtAccessTokenConverter {
                 map.put(USERNAME, user.getUsername());
                 map.put("userId", user.getUserId());
                 map.put("name",user.getName());
-                map.put("supplierCode",user.getSupplierCode());
                 map.put("state",user.getState());
                 map.put("loginPermission",user.getLoginPermission());
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);

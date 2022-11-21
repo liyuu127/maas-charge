@@ -1,7 +1,7 @@
 package com.haylion.charge.system.service;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.haylion.charge.system.ScmSystemApplication;
+import com.haylion.charge.system.ChargeSystemApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static com.haylion.common.core.constant.RedisConstant.USER_VERIFICATION_C
  */
 @RunWith(SpringRunner.class)
 @Slf4j
-@SpringBootTest(classes = ScmSystemApplication.class)
+@SpringBootTest(classes = ChargeSystemApplication.class)
 public class SmsServiceTest {
 
     @Autowired

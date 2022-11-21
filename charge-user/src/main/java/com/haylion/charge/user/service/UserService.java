@@ -62,9 +62,6 @@ public class UserService {
     @Autowired
     private TokenStore tokenStore;
 
-    @Autowired
-    private CompanyTMapper companyTMapper;
-
     /**
      * 通过用户名查询用户包括角色权限等
      *
@@ -244,16 +241,11 @@ public class UserService {
     private UserPermissionVo populateUserPermissionVo(UserT userT) {
         Set<String> permissions = new HashSet<>(userTMapper.selectResourceCodeByUserId(userT.getId()));
         Set<String> roles = userTMapper.selectRoleCodesByUserId(userT.getId()).stream().map(role -> "ROLE_" + role).collect(Collectors.toSet());
-        CompanyT companyT = companyTMapper.selectByPrimaryKey(userT.getCId());
         permissions.addAll(roles);
-        UserPermissionVo userPermissionVo = new UserPermissionVo()
+        return new UserPermissionVo()
                 .setUserT(userT)
                 .setPermissions(permissions)
                 .setRoles(roles);
-        if (companyT != null) {
-            userPermissionVo.setSupplierCode(companyT.getSupplierCode());
-        }
-        return userPermissionVo;
     }
 
     public void logout() {

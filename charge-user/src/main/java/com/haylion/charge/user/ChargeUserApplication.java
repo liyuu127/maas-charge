@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.haylion.common.repository.mapper")
-public class ScmUserApplication {
+public class ChargeUserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ScmUserApplication.class, args);
+        SpringApplication.run(ChargeUserApplication.class, args);
     }
 }

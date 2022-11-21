@@ -3,7 +3,7 @@ package com.haylion.charge.system.service;
 import com.haylion.common.core.model.ResponseData;
 import com.haylion.common.oss.model.AliyunUploadParam;
 import com.haylion.common.oss.service.OssClient;
-import com.haylion.charge.system.ScmSystemApplication;
+import com.haylion.charge.system.ChargeSystemApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.io.IOException;
  * description
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ScmSystemApplication.class)
+@SpringBootTest(classes = ChargeSystemApplication.class)
 public class UploadServiceTest {
 
     @Autowired

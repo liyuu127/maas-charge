@@ -29,7 +29,6 @@ public class SecurityUser implements UserDetails {
     private String name;
     private String username;//登录用户名
     private String password;//登录密码
-    private String supplierCode;//供应商编号
     private Integer state;
     private Integer loginPermission;
     private Collection<? extends GrantedAuthority> authorities;

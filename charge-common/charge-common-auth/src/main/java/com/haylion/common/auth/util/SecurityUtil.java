@@ -80,13 +80,6 @@ public class SecurityUtil {
         return authentication.getName();
     }
 
-    public String getSupplierCode() {
-        SecurityUser user = getUser();
-        if (user == null) {
-            return null;
-        }
-        return user.getSupplierCode();
-    }
 
     /**
      * 获取用户id

@@ -54,7 +54,6 @@ public class UserAuthenticationConverter extends DefaultUserAuthenticationConver
         String name = (String) map.get("name");
 //        String password = (String) map.get("password");
         Integer state = (Integer) map.get("state");
-        String supplierCode = (String) map.get("supplierCode");
         Integer loginPermission = (Integer) map.get("loginPermission");
         return SecurityUser.builder()
                 .userId(userId)
@@ -62,7 +61,6 @@ public class UserAuthenticationConverter extends DefaultUserAuthenticationConver
                 .username(username)
 //                .password(BCRYPT_WAPPER + password)
                 .state(state)
-                .supplierCode(supplierCode)
                 .loginPermission(loginPermission).build();
     }
 

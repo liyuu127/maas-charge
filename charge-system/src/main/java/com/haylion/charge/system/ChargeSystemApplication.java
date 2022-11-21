@@ -1,5 +1,6 @@
-package com.haylion.charge.auth;
+package com.haylion.charge.system;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -7,16 +8,17 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author liyu
- * date 2022/4/7 14:37
- * description
+ * @author LaiXiaoPeng
+ * @version 1.0
+ * @date 2022/4/13 9:32
  */
 @EnableFeignClients
-@EnableDiscoveryClient
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableTransactionManagement
-public class ScmAuthApplication {
+@MapperScan(basePackages = "com.haylion.common.repository.mapper")
+public class ChargeSystemApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ScmAuthApplication.class, args);
+        SpringApplication.run(ChargeSystemApplication.class,args);
     }
 }

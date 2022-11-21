@@ -48,7 +48,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserPermissionVo userPermission = JSON.parseObject(JSONObject.toJSONString(responseData.getData()), UserPermissionVo.class);
         Collection<? extends GrantedAuthority> authorities = getGrantedAuthorities(userPermission);
         SecurityUser securityUser = getSecurityUser(userPermission.getUserT(), authorities);
-        securityUser.setSupplierCode(userPermission.getSupplierCode());
         return securityUser;
     }
 

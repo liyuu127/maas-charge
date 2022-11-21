@@ -19,13 +19,13 @@ public class UserRemoteFallbackImpl implements UserRemoteClient {
 
     @Override
     public ResponseData selectPermissionCodeByUsername(String username) {
-        log.info("feign 调用失败{}", throwable.getLocalizedMessage());
+        log.error("feign 调用失败{}", throwable.getLocalizedMessage());
         return ResponseData.fail(throwable.getLocalizedMessage());
     }
 
     @Override
     public ResponseData selectLoginInfo(String username) {
-        log.info("feign 调用失败{}", throwable.getLocalizedMessage());
+        log.error("feign 调用失败{}", throwable.getLocalizedMessage());
         return ResponseData.fail(throwable.getLocalizedMessage());
     }
 }
