@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.haylion</groupId>
+        <artifactId>charge</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>charge-common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>charge-common-core</module>
+        <module>charge-common-auth</module>
+        <module>charge-common-redis</module>
+        <module>charge-common-log</module>
+        <module>charge-common-repository</module>
+        <module>charge-common-entity</module>
+        <module>charge-common-sms</module>
+        <module>charge-common-oss</module>
+        <module>charge-common-notice</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>aliyun-spring-boot-dependencies</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

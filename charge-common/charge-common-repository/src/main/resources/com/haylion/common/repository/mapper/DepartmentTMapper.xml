@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.DepartmentTMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.DepartmentT">
+        <id column="id" property="id"/>
+        <result column="c_id" property="cId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="res_name" property="resName"/>
+        <result column="res_mobile" property="resMobile"/>
+        <result column="icon" property="icon"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, c_id, `name`, description, res_name, res_mobile, icon, create_by, create_time,
+    update_by, update_time, deleted
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from department_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.DepartmentT"
+            useGeneratedKeys="true">
+
+    insert into department_t (c_id, `name`, description, res_name, res_mobile, icon, create_by,
+      create_time, update_by, update_time, deleted)
+    values (#{cId}, #{name}, #{description}, #{resName}, #{resMobile}, #{icon}, #{createBy},
+      #{createTime}, #{updateBy}, #{updateTime}, #{deleted})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.DepartmentT" useGeneratedKeys="true">
+
+        insert into department_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="description != null and description != ''">
+                description,
+            </if>
+            <if test="resName != null and resName != ''">
+                res_name,
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                res_mobile,
+            </if>
+            <if test="icon != null and icon != ''">
+                icon,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                #{cId},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="resName != null and resName != ''">
+                #{resName},
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                #{resMobile},
+            </if>
+            <if test="icon != null and icon != ''">
+                #{icon},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.DepartmentT">
+
+        update department_t
+        <set>
+            <if test="cId != null">
+                c_id = #{cId},
+            </if>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="resName != null and resName != ''">
+                res_name = #{resName},
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                res_mobile = #{resMobile},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.DepartmentT">
+
+    update department_t
+    set c_id = #{cId},
+      `name` = #{name},
+      description = #{description},
+      res_name = #{resName},
+      res_mobile = #{resMobile},
+      icon = #{icon},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime},
+      deleted = #{deleted}
+    where id = #{id}
+  </update>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.DepartmentT" useGeneratedKeys="true">
+
+        insert into department_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            c_id,
+            `name`,
+            description,
+            res_name,
+            res_mobile,
+            icon,
+            create_by,
+            create_time,
+            update_by,
+            update_time,
+            deleted,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            #{cId},
+            #{name},
+            #{description},
+            #{resName},
+            #{resMobile},
+            #{icon},
+            #{createBy},
+            #{createTime},
+            #{updateBy},
+            #{updateTime},
+            #{deleted},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            c_id = #{cId},
+            `name` = #{name},
+            description = #{description},
+            res_name = #{resName},
+            res_mobile = #{resMobile},
+            icon = #{icon},
+            create_by = #{createBy},
+            create_time = #{createTime},
+            update_by = #{updateBy},
+            update_time = #{updateTime},
+            deleted = #{deleted},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.DepartmentT" useGeneratedKeys="true">
+
+        insert into department_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="resName != null">
+                res_name,
+            </if>
+            <if test="resMobile != null">
+                res_mobile,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="cId != null">
+                #{cId},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="description != null">
+                #{description},
+            </if>
+            <if test="resName != null">
+                #{resName},
+            </if>
+            <if test="resMobile != null">
+                #{resMobile},
+            </if>
+            <if test="icon != null">
+                #{icon},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="cId != null">
+                c_id = #{cId},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="resName != null">
+                res_name = #{resName},
+            </if>
+            <if test="resMobile != null">
+                res_mobile = #{resMobile},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from department_t as hdt
+        <where>
+            <if test="name != null and name != ''">
+                and hdt.name like concat('%',#{name},'%')
+            </if>
+            <if test="resName != null and resName != ''">
+                and hdt.res_name like concat('%',#{resName},'%')
+            </if>
+            <if test="cId != null">
+                and hdt.c_id = #{cId}
+            </if>
+            and hdt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+        order by hdt.create_time desc
+    </select>
+    <select id="selectByNameAndCId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from department_t as hdt
+        where hdt.c_id = #{cId}
+        and hdt.name = #{name}
+        and hdt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </select>
+    <select id="selectExistByCId" resultType="boolean">
+        SELECT  IFNULL(
+        (select 1
+        from department_t as hdt
+        where hdt.c_id = #{cId}
+        and hdt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        limit 1),0)
+    </select>
+
+</mapper>

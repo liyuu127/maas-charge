@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.SiteNoticeSourceMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.SiteNoticeSource">
+    
+    <id column="id" property="id" />
+    <result column="source_id" property="sourceId" />
+    <result column="source_type" property="sourceType" />
+    <result column="content_type" property="contentType" />
+    <result column="source_content" property="sourceContent" />
+    <result column="remind_time" property="remindTime" />
+    <result column="create_time" property="createTime" />
+    <result column="deleted" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    
+    id, source_id, source_type, content_type, source_content, remind_time, create_time, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    
+    select 
+    <include refid="Base_Column_List" />
+    from site_notice_source
+    where id = #{id}
+  </select>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.SiteNoticeSource" useGeneratedKeys="true">
+    
+    insert into site_notice_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="contentType != null">
+        content_type,
+      </if>
+      <if test="sourceContent != null and sourceContent != ''">
+        source_content,
+      </if>
+      <if test="remindTime != null">
+        remind_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sourceId != null">
+        #{sourceId},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType},
+      </if>
+      <if test="contentType != null">
+        #{contentType},
+      </if>
+      <if test="sourceContent != null and sourceContent != ''">
+        #{sourceContent},
+      </if>
+      <if test="remindTime != null">
+        #{remindTime},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="deleted != null">
+        #{deleted},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.SiteNoticeSource">
+    
+    update site_notice_source
+    <set>
+      <if test="sourceId != null">
+        source_id = #{sourceId},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType},
+      </if>
+      <if test="sourceContent != null and sourceContent != ''">
+        source_content = #{sourceContent},
+      </if>
+      <if test="remindTime != null">
+        remind_time = #{remindTime},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    
+    insert into site_notice_source
+    (source_id, source_type, content_type, source_content, remind_time, create_time, deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.sourceId}, #{item.sourceType}, #{item.contentType}, #{item.sourceContent},
+      #{item.remindTime}, #{item.createTime}, #{item.deleted})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.SiteNoticeSource" useGeneratedKeys="true">
+    
+    insert into site_notice_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      source_id,
+      source_type,
+      content_type,
+      source_content,
+      remind_time,
+      create_time,
+      deleted,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      #{sourceId},
+      #{sourceType},
+      #{contentType},
+      #{sourceContent},
+      #{remindTime},
+      #{createTime},
+      #{deleted},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id},
+      </if>
+      source_id = #{sourceId},
+      source_type = #{sourceType},
+      content_type = #{contentType},
+      source_content = #{sourceContent},
+      remind_time = #{remindTime},
+      create_time = #{createTime},
+      deleted = #{deleted},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.SiteNoticeSource" useGeneratedKeys="true">
+    
+    insert into site_notice_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="contentType != null">
+        content_type,
+      </if>
+      <if test="sourceContent != null">
+        source_content,
+      </if>
+      <if test="remindTime != null">
+        remind_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType},
+      </if>
+      <if test="contentType != null">
+        #{contentType},
+      </if>
+      <if test="sourceContent != null">
+        #{sourceContent},
+      </if>
+      <if test="remindTime != null">
+        #{remindTime},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="deleted != null">
+        #{deleted},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id},
+      </if>
+      <if test="sourceId != null">
+        source_id = #{sourceId},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType},
+      </if>
+      <if test="sourceContent != null">
+        source_content = #{sourceContent},
+      </if>
+      <if test="remindTime != null">
+        remind_time = #{remindTime},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted},
+      </if>
+    </trim>
+  </insert>
+</mapper>

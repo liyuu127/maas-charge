@@ -1,0 +1,17 @@
+
+#  main:
+#    #当遇到同样名字的时候，是否允许覆盖注册
+#    allow-bean-definition-overriding: true
+#alibaba:
+#  cloud:
+#    access-key: LTAI4FfdU5MxEub7vHUcJbVK
+#    secret-key: QMGZRHIHvcWgL7hgFA5ktxDrDsWsq2
+#    oss:
+#      endpoint: oss-cn-shenzhen.aliyuncs.com
+
+# oss endpoints暴露
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: *

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.UserRoleTMapper">
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.UserRoleT" useGeneratedKeys="true">
+        insert into user_role_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            user_id,
+            role_id,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            #{userId},
+            #{roleId},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            user_id = #{userId},
+            role_id = #{roleId},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.UserRoleT" useGeneratedKeys="true">
+        insert into user_role_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="roleId != null">
+                #{roleId},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+        </trim>
+    </insert>
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.UserRoleT">
+
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+
+    id, user_id, role_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from user_role_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.UserRoleT"
+            useGeneratedKeys="true">
+
+    insert into user_role_t (user_id, role_id)
+    values (#{userId}, #{roleId})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.UserRoleT" useGeneratedKeys="true">
+
+        insert into user_role_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="roleId != null">
+                #{roleId},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.UserRoleT">
+
+        update user_role_t
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.UserRoleT">
+
+    update user_role_t
+    set user_id = #{userId},
+      role_id = #{roleId}
+    where id = #{id}
+  </update>
+    <delete id="deleteByUserId">
+    delete
+    from user_role_t
+    where user_id =#{userId}
+  </delete>
+    <delete id="deleteByRoleId">
+    delete
+    from user_role_t
+    where role_id =#{roleId}
+    </delete>
+</mapper>

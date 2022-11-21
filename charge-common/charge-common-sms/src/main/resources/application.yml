@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: charge-common-sms
+
+  #阿里云参数配置
+alibaba:
+  #阿里云短信参数
+  cloud:
+    access-key: LTAI4FiJtaZf2T31ddWvf2Z2
+    secret-key: rDPCTF85RrnvmW9eJGI1h8hYgRBLK9
+    # SMS Properties
+#    region-id: cn-hangzhou
+#    sign-name: AlphaHub
+#    template-code: SMS_202823833
+    # MNS消息队列消费模式表示通过MNS的Queue模型来接收短信的回执消息和上行短信内容
+    sms:
+#      #上行消息接收
+#      up-queue-name: Alicom-Queue-SmsUpMessageListener-SmsUp
+#      #状态报告接收
+#      report-queue-name: Alicom-Queue-SmsReportMessageListener-SmsReport

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.AppInfoMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.AppInfo">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="app_flag" jdbcType="SMALLINT" property="appFlag" />
+    <result column="app_type" jdbcType="SMALLINT" property="appType" />
+    <result column="version_number" jdbcType="INTEGER" property="versionNumber" />
+    <result column="version_name" jdbcType="VARCHAR" property="versionName" />
+    <result column="forced_updated_instructions" jdbcType="VARCHAR" property="forcedUpdatedInstructions" />
+    <result column="updated_instructions" jdbcType="VARCHAR" property="updatedInstructions" />
+    <result column="min_version_number" jdbcType="INTEGER" property="minVersionNumber" />
+    <result column="upload_url" jdbcType="VARCHAR" property="uploadUrl" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted" jdbcType="SMALLINT" property="deleted" />
+    <result column="valid" jdbcType="TINYINT" property="valid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, app_flag, app_type, version_number, version_name, forced_updated_instructions, 
+    updated_instructions, min_version_number, upload_url, created_at, updated_at, deleted, 
+    `valid`
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update app_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="app_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.appFlag,jdbcType=SMALLINT}
+        </foreach>
+      </trim>
+      <trim prefix="app_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.appType,jdbcType=SMALLINT}
+        </foreach>
+      </trim>
+      <trim prefix="version_number = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.versionNumber,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="version_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.versionName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="forced_updated_instructions = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.forcedUpdatedInstructions,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="updated_instructions = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updatedInstructions,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="min_version_number = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.minVersionNumber,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="upload_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.uploadUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="created_at = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createdAt,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="updated_at = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updatedAt,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.deleted,jdbcType=SMALLINT}
+        </foreach>
+      </trim>
+      <trim prefix="`valid` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.valid,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into app_info
+    (app_flag, app_type, version_number, version_name, forced_updated_instructions, updated_instructions, 
+      min_version_number, upload_url, created_at, updated_at, deleted, `valid`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.appFlag,jdbcType=SMALLINT}, #{item.appType,jdbcType=SMALLINT}, #{item.versionNumber,jdbcType=INTEGER}, 
+        #{item.versionName,jdbcType=VARCHAR}, #{item.forcedUpdatedInstructions,jdbcType=VARCHAR}, 
+        #{item.updatedInstructions,jdbcType=VARCHAR}, #{item.minVersionNumber,jdbcType=INTEGER}, 
+        #{item.uploadUrl,jdbcType=VARCHAR}, #{item.createdAt,jdbcType=TIMESTAMP}, #{item.updatedAt,jdbcType=TIMESTAMP}, 
+        #{item.deleted,jdbcType=SMALLINT}, #{item.valid,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.AppInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      app_flag,
+      app_type,
+      version_number,
+      version_name,
+      forced_updated_instructions,
+      updated_instructions,
+      min_version_number,
+      upload_url,
+      created_at,
+      updated_at,
+      deleted,
+      `valid`,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{appFlag,jdbcType=SMALLINT},
+      #{appType,jdbcType=SMALLINT},
+      #{versionNumber,jdbcType=INTEGER},
+      #{versionName,jdbcType=VARCHAR},
+      #{forcedUpdatedInstructions,jdbcType=VARCHAR},
+      #{updatedInstructions,jdbcType=VARCHAR},
+      #{minVersionNumber,jdbcType=INTEGER},
+      #{uploadUrl,jdbcType=VARCHAR},
+      #{createdAt,jdbcType=TIMESTAMP},
+      #{updatedAt,jdbcType=TIMESTAMP},
+      #{deleted,jdbcType=SMALLINT},
+      #{valid,jdbcType=TINYINT},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      app_flag = #{appFlag,jdbcType=SMALLINT},
+      app_type = #{appType,jdbcType=SMALLINT},
+      version_number = #{versionNumber,jdbcType=INTEGER},
+      version_name = #{versionName,jdbcType=VARCHAR},
+      forced_updated_instructions = #{forcedUpdatedInstructions,jdbcType=VARCHAR},
+      updated_instructions = #{updatedInstructions,jdbcType=VARCHAR},
+      min_version_number = #{minVersionNumber,jdbcType=INTEGER},
+      upload_url = #{uploadUrl,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=SMALLINT},
+      `valid` = #{valid,jdbcType=TINYINT},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.AppInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appFlag != null">
+        app_flag,
+      </if>
+      <if test="appType != null">
+        app_type,
+      </if>
+      <if test="versionNumber != null">
+        version_number,
+      </if>
+      <if test="versionName != null">
+        version_name,
+      </if>
+      <if test="forcedUpdatedInstructions != null">
+        forced_updated_instructions,
+      </if>
+      <if test="updatedInstructions != null">
+        updated_instructions,
+      </if>
+      <if test="minVersionNumber != null">
+        min_version_number,
+      </if>
+      <if test="uploadUrl != null">
+        upload_url,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="valid != null">
+        `valid`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appFlag != null">
+        #{appFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="appType != null">
+        #{appType,jdbcType=SMALLINT},
+      </if>
+      <if test="versionNumber != null">
+        #{versionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="forcedUpdatedInstructions != null">
+        #{forcedUpdatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedInstructions != null">
+        #{updatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="minVersionNumber != null">
+        #{minVersionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="uploadUrl != null">
+        #{uploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=TINYINT},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appFlag != null">
+        app_flag = #{appFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="appType != null">
+        app_type = #{appType,jdbcType=SMALLINT},
+      </if>
+      <if test="versionNumber != null">
+        version_number = #{versionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        version_name = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="forcedUpdatedInstructions != null">
+        forced_updated_instructions = #{forcedUpdatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedInstructions != null">
+        updated_instructions = #{updatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="minVersionNumber != null">
+        min_version_number = #{minVersionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="uploadUrl != null">
+        upload_url = #{uploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        `valid` = #{valid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.haylion.common.entity.entity.AppInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appFlag != null">
+        app_flag,
+      </if>
+      <if test="appType != null">
+        app_type,
+      </if>
+      <if test="versionNumber != null">
+        version_number,
+      </if>
+      <if test="versionName != null">
+        version_name,
+      </if>
+      <if test="forcedUpdatedInstructions != null">
+        forced_updated_instructions,
+      </if>
+      <if test="updatedInstructions != null">
+        updated_instructions,
+      </if>
+      <if test="minVersionNumber != null">
+        min_version_number,
+      </if>
+      <if test="uploadUrl != null">
+        upload_url,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appFlag != null">
+        #{appFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="appType != null">
+        #{appType,jdbcType=SMALLINT},
+      </if>
+      <if test="versionNumber != null">
+        #{versionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="forcedUpdatedInstructions != null">
+        #{forcedUpdatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedInstructions != null">
+        #{updatedInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="minVersionNumber != null">
+        #{minVersionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="uploadUrl != null">
+        #{uploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+      #{valid,jdbcType=TINYINT}
+      </if>
+    </trim>
+    </insert>
+    <select id="selectAppInfoList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from app_info
+        <where>
+            <if test="type != null">
+                app_type = #{type,jdbcType=TINYINT}
+            </if>
+            <if test="versionNumber != null">
+                and version_number = #{versionNumber,jdbcType=INTEGER}
+            </if>
+            <if test="versionName != null and versionName != ''">
+                and version_name = #{versionName,jdbcType=VARCHAR}
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+                    order by app_type asc, valid desc, updated_at desc
+        </where>
+    </select>
+    <update id="validCurrent">
+        update app_info
+        <set>
+            valid = ${@com.haylion.common.core.constant.CommonConstant@VALID_YES}
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>
+                    and 1 = 2
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+  <update id="invalidOld">
+      update app_info
+      <set>
+          valid = ${@com.haylion.common.core.constant.CommonConstant@VALID_NO}
+      </set>
+      <where>
+          <choose>
+              <when test="id != null">
+                  id != #{id}
+              </when>
+              <otherwise>
+                  and 1 = 2
+              </otherwise>
+          </choose>
+          and app_type = #{appType}
+          and valid = ${@com.haylion.common.core.constant.CommonConstant@VALID_YES}
+          and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+      </where>
+  </update>
+    <select id="selectLatestVersionAppInfo" resultType="com.haylion.common.entity.entity.AppInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from app_info
+        where valid = ${@com.haylion.common.core.constant.CommonConstant@VALID_YES}
+          and app_type = #{appType}
+          and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        order by updated_at desc
+        limit 1
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from app_info
+        <where>
+            id = #{id}
+        </where>
+    </select>
+</mapper>

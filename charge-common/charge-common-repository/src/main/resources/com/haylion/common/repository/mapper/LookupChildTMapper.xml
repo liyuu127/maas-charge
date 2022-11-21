@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.LookupChildTMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.LookupChildT">
+
+    <id column="id" property="id" />
+    <result column="pid" property="pid" />
+    <result column="value" property="value" />
+    <result column="name" property="name" />
+    <result column="description" property="description" />
+    <result column="orders" property="orders" />
+    <result column="status" property="status" />
+    <result column="attr1" property="attr1" />
+    <result column="attr2" property="attr2" />
+    <result column="attr3" property="attr3" />
+    <result column="attr4" property="attr4" />
+    <result column="create_by" property="createBy" />
+    <result column="update_by" property="updateBy" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    id, pid, `value`, `name`, description, orders, `status`, attr1, attr2, attr3, attr4, 
+    create_by, update_by, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from lookup_child_t
+    where id = #{id}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.LookupChildT" useGeneratedKeys="true">
+
+    insert into lookup_child_t (pid, `value`, `name`, description, orders, `status`, attr1,
+      attr2, attr3, attr4, create_by, update_by, create_time, update_time
+      )
+    values (#{pid}, #{value}, #{name}, #{description}, #{orders}, #{status}, #{attr1}, 
+      #{attr2}, #{attr3}, #{attr4}, #{createBy}, #{updateBy}, #{createTime}, #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.LookupChildT" useGeneratedKeys="true">
+
+    insert into lookup_child_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="value != null and value != ''">
+        `value`,
+      </if>
+      <if test="name != null and name != ''">
+        `name`,
+      </if>
+      <if test="description != null and description != ''">
+        description,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="attr1 != null and attr1 != ''">
+        attr1,
+      </if>
+      <if test="attr2 != null and attr2 != ''">
+        attr2,
+      </if>
+      <if test="attr3 != null and attr3 != ''">
+        attr3,
+      </if>
+      <if test="attr4 != null and attr4 != ''">
+        attr4,
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by,
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid},
+      </if>
+      <if test="value != null and value != ''">
+        #{value},
+      </if>
+      <if test="name != null and name != ''">
+        #{name},
+      </if>
+      <if test="description != null and description != ''">
+        #{description},
+      </if>
+      <if test="orders != null">
+        #{orders},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="attr1 != null and attr1 != ''">
+        #{attr1},
+      </if>
+      <if test="attr2 != null and attr2 != ''">
+        #{attr2},
+      </if>
+      <if test="attr3 != null and attr3 != ''">
+        #{attr3},
+      </if>
+      <if test="attr4 != null and attr4 != ''">
+        #{attr4},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        #{updateBy},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.LookupChildT">
+
+    update lookup_child_t
+    <set>
+      <if test="pid != null">
+        pid = #{pid},
+      </if>
+      <if test="value != null and value != ''">
+        `value` = #{value},
+      </if>
+      <if test="name != null and name != ''">
+        `name` = #{name},
+      </if>
+      <if test="description != null and description != ''">
+        description = #{description},
+      </if>
+      <if test="orders != null">
+        orders = #{orders},
+      </if>
+      <if test="status != null">
+        `status` = #{status},
+      </if>
+      <if test="attr1 != null and attr1 != ''">
+        attr1 = #{attr1},
+      </if>
+      <if test="attr2 != null and attr2 != ''">
+        attr2 = #{attr2},
+      </if>
+      <if test="attr3 != null and attr3 != ''">
+        attr3 = #{attr3},
+      </if>
+      <if test="attr4 != null and attr4 != ''">
+        attr4 = #{attr4},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by = #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by = #{updateBy},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.LookupChildT">
+    update lookup_child_t
+    set pid         = #{pid},
+        `value`     = #{value},
+        `name`      = #{name},
+        description = #{description},
+        orders      = #{orders},
+        `status`    = #{status},
+        attr1       = #{attr1},
+        attr2       = #{attr2},
+        attr3       = #{attr3},
+        attr4       = #{attr4},
+        create_by   = #{createBy},
+        update_by   = #{updateBy},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+    where id = #{id}
+  </update>
+    <delete id="delete" parameterType="integer">
+        delete
+        from lookup_child_t
+        where id = #{id}
+    </delete>
+    
+    <delete id="deleteByPid" parameterType="integer">
+        delete
+        from lookup_child_t
+        where pid = #{pid}
+    </delete>
+
+    <select id="countByValueAndPid" resultType="int">
+        select count(id)
+        from lookup_child_t where value = #{value}
+                                  and pid = #{pid}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+
+    <select id="listLookupChildByPid" parameterType="integer"
+            resultType="com.haylion.common.entity.entity.LookupChildT">
+        select *
+        from lookup_child_t
+        where pid = #{pid}
+        order by orders, create_time desc
+    </select>
+
+
+    <select id="listLookupChildByPvalue" parameterType="string"
+            resultType="com.haylion.common.entity.entity.LookupChildT">
+        select child.*
+        from lookup_parent_t par,
+             lookup_child_t child
+        where par.id = child.pid
+          and par.value = #{value}
+        order by child.orders, child.create_time desc
+    </select>
+    <select id="selectMaxOrdersByPid" resultType="String">
+        select max(`orders`)
+        from lookup_child_t
+        where pid = #{pId,jdbcType=INTEGER}
+          and status = 1
+    </select>
+  <select id="selectByParentValueAndKey" resultMap="BaseResultMap">
+    select hlct.id,
+           hlct.pid,
+           hlct.`value`,
+           hlct.`name`,
+           hlct.description,
+           hlct.orders,
+           hlct.`status`,
+           hlct.attr1,
+           hlct.attr2,
+           hlct.attr3,
+           hlct.attr4,
+           hlct.create_by,
+           hlct.update_by,
+           hlct.create_time,
+           hlct.update_time
+    from lookup_child_t hlct
+                 left join lookup_parent_t hlpt on hlpt.id = hlct.pid
+    where hlpt.value = #{parentValue}
+      and hlct.value = #{key}
+  </select>
+</mapper>

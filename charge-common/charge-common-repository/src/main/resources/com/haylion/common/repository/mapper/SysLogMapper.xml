@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.SysLog">
+    <!--@mbg.generated-->
+    <id column="id" property="id" />
+    <result column="request_ip" property="requestIp" />
+    <result column="type" property="type" />
+    <result column="user_name" property="userName" />
+    <result column="description" property="description" />
+    <result column="action_method" property="actionMethod" />
+    <result column="action_url" property="actionUrl" />
+    <result column="params" property="params" />
+    <result column="ua" property="ua" />
+    <result column="class_path" property="classPath" />
+    <result column="request_method" property="requestMethod" />
+    <result column="operate_type" property="operateType" />
+    <result column="start_time" property="startTime" />
+    <result column="finish_time" property="finishTime" />
+    <result column="consuming_time" property="consumingTime" />
+    <result column="ex_desc" property="exDesc" />
+    <result column="ex_detail" property="exDetail" />
+    <result column="tenant_id" property="tenantId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, request_ip, `type`, user_name, description, action_method, action_url, params, 
+    ua, class_path, request_method, operate_type, start_time, finish_time, consuming_time, 
+    ex_desc, ex_detail, tenant_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where id = #{id}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.SysLog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_log (request_ip, `type`, user_name, description, action_method, action_url, 
+      params, ua, class_path, request_method, operate_type, start_time, 
+      finish_time, consuming_time, ex_desc, ex_detail, tenant_id)
+    values (#{requestIp}, #{type}, #{userName}, #{description}, #{actionMethod}, #{actionUrl}, 
+      #{params}, #{ua}, #{classPath}, #{requestMethod}, #{operateType}, #{startTime}, 
+      #{finishTime}, #{consumingTime}, #{exDesc}, #{exDetail}, #{tenantId})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.SysLog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="requestIp != null and requestIp != ''">
+        request_ip,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="userName != null and userName != ''">
+        user_name,
+      </if>
+      <if test="description != null and description != ''">
+        description,
+      </if>
+      <if test="actionMethod != null and actionMethod != ''">
+        action_method,
+      </if>
+      <if test="actionUrl != null and actionUrl != ''">
+        action_url,
+      </if>
+      <if test="params != null and params != ''">
+        params,
+      </if>
+      <if test="ua != null and ua != ''">
+        ua,
+      </if>
+      <if test="classPath != null and classPath != ''">
+        class_path,
+      </if>
+      <if test="requestMethod != null and requestMethod != ''">
+        request_method,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="consumingTime != null">
+        consuming_time,
+      </if>
+      <if test="exDesc != null and exDesc != ''">
+        ex_desc,
+      </if>
+      <if test="exDetail != null and exDetail != ''">
+        ex_detail,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="requestIp != null and requestIp != ''">
+        #{requestIp},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="userName != null and userName != ''">
+        #{userName},
+      </if>
+      <if test="description != null and description != ''">
+        #{description},
+      </if>
+      <if test="actionMethod != null and actionMethod != ''">
+        #{actionMethod},
+      </if>
+      <if test="actionUrl != null and actionUrl != ''">
+        #{actionUrl},
+      </if>
+      <if test="params != null and params != ''">
+        #{params},
+      </if>
+      <if test="ua != null and ua != ''">
+        #{ua},
+      </if>
+      <if test="classPath != null and classPath != ''">
+        #{classPath},
+      </if>
+      <if test="requestMethod != null and requestMethod != ''">
+        #{requestMethod},
+      </if>
+      <if test="operateType != null">
+        #{operateType},
+      </if>
+      <if test="startTime != null">
+        #{startTime},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime},
+      </if>
+      <if test="consumingTime != null">
+        #{consumingTime},
+      </if>
+      <if test="exDesc != null and exDesc != ''">
+        #{exDesc},
+      </if>
+      <if test="exDetail != null and exDetail != ''">
+        #{exDetail},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.SysLog">
+    <!--@mbg.generated-->
+    update sys_log
+    <set>
+      <if test="requestIp != null and requestIp != ''">
+        request_ip = #{requestIp},
+      </if>
+      <if test="type != null">
+        `type` = #{type},
+      </if>
+      <if test="userName != null and userName != ''">
+        user_name = #{userName},
+      </if>
+      <if test="description != null and description != ''">
+        description = #{description},
+      </if>
+      <if test="actionMethod != null and actionMethod != ''">
+        action_method = #{actionMethod},
+      </if>
+      <if test="actionUrl != null and actionUrl != ''">
+        action_url = #{actionUrl},
+      </if>
+      <if test="params != null and params != ''">
+        params = #{params},
+      </if>
+      <if test="ua != null and ua != ''">
+        ua = #{ua},
+      </if>
+      <if test="classPath != null and classPath != ''">
+        class_path = #{classPath},
+      </if>
+      <if test="requestMethod != null and requestMethod != ''">
+        request_method = #{requestMethod},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime},
+      </if>
+      <if test="consumingTime != null">
+        consuming_time = #{consumingTime},
+      </if>
+      <if test="exDesc != null and exDesc != ''">
+        ex_desc = #{exDesc},
+      </if>
+      <if test="exDetail != null and exDetail != ''">
+        ex_detail = #{exDetail},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.SysLog">
+    <!--@mbg.generated-->
+    update sys_log
+    set request_ip = #{requestIp},
+      `type` = #{type},
+      user_name = #{userName},
+      description = #{description},
+      action_method = #{actionMethod},
+      action_url = #{actionUrl},
+      params = #{params},
+      ua = #{ua},
+      class_path = #{classPath},
+      request_method = #{requestMethod},
+      operate_type = #{operateType},
+      start_time = #{startTime},
+      finish_time = #{finishTime},
+      consuming_time = #{consumingTime},
+      ex_desc = #{exDesc},
+      ex_detail = #{exDetail},
+      tenant_id = #{tenantId}
+    where id = #{id}
+  </update>
+</mapper>

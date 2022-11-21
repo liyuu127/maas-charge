@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.CompanyTMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.CompanyT">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="color" property="color"/>
+        <result column="description" property="description"/>
+        <result column="res_name" property="resName"/>
+        <result column="res_mobile" property="resMobile"/>
+        <result column="inner_company" property="innerCompany"/>
+        <result column="address" property="address"/>
+        <result column="supplier_code" property="supplierCode"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, `type`, icon, color, description, res_name, res_mobile, inner_company,
+        address, supplier_code, create_by, create_time, update_by, update_time, deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from company_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.CompanyT"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into company_t (`name`, `type`, icon, color, description, res_name, res_mobile,
+        inner_company, address, supplier_code, create_by, create_time, update_by, update_time,
+        deleted)
+        values (#{name}, #{type}, #{icon}, #{color}, #{description}, #{resName}, #{resMobile},
+        #{innerCompany}, #{address}, #{supplierCode}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime},
+        #{deleted})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.CompanyT" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into company_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="icon != null and icon != ''">
+                icon,
+            </if>
+            <if test="color != null and color != ''">
+                color,
+            </if>
+            <if test="description != null and description != ''">
+                description,
+            </if>
+            <if test="resName != null and resName != ''">
+                res_name,
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                res_mobile,
+            </if>
+            <if test="innerCompany != null">
+                inner_company,
+            </if>
+            <if test="address != null and address != ''">
+                address,
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                supplier_code,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="icon != null and icon != ''">
+                #{icon},
+            </if>
+            <if test="color != null and color != ''">
+                #{color},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="resName != null and resName != ''">
+                #{resName},
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                #{resMobile},
+            </if>
+            <if test="innerCompany != null">
+                #{innerCompany},
+            </if>
+            <if test="address != null and address != ''">
+                #{address},
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                #{supplierCode},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.CompanyT">
+        <!--@mbg.generated-->
+        update company_t
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="color != null and color != ''">
+                color = #{color},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="resName != null and resName != ''">
+                res_name = #{resName},
+            </if>
+            <if test="resMobile != null and resMobile != ''">
+                res_mobile = #{resMobile},
+            </if>
+            <if test="innerCompany != null">
+                inner_company = #{innerCompany},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                supplier_code = #{supplierCode},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.CompanyT">
+        <!--@mbg.generated-->
+        update company_t
+        set `name` = #{name},
+        `type` = #{type},
+        icon = #{icon},
+        color = #{color},
+        description = #{description},
+        res_name = #{resName},
+        res_mobile = #{resMobile},
+        inner_company = #{innerCompany},
+        address = #{address},
+        supplier_code = #{supplierCode},
+        create_by = #{createBy},
+        create_time = #{createTime},
+        update_by = #{updateBy},
+        update_time = #{updateTime},
+        deleted = #{deleted}
+        where id = #{id}
+    </update>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company_t as hct
+        <where>
+            <if test="name != null and name != ''">
+                and hct.name like concat('%',#{name},'%')
+            </if>
+            <if test="resName != null and resName != ''">
+                and hct.res_name like concat('%',#{resName},'%')
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                and hct.supplier_code like concat('%',#{resName},'%')
+            </if>
+            <if test="innerCompany != null ">
+                and hct.inner_company = #{innerCompany}
+            </if>
+            <if test="type != null and type.length != 0">
+                and hct.type in
+                <foreach collection="type" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            and hct.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+            order by hct.create_time desc
+    </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from company_t as hct
+    where hct.name = #{name}
+    and hct.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+  </select>
+    <select id="selectBySupplierCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company_t as hct
+        where hct.supplier_code = #{supplierCode}
+        and hct.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </select>
+
+</mapper>

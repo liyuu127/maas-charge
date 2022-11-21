@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.PositionTMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.PositionT">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="d_id" property="dId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="color_id" property="colorId"/>
+        <result column="icon" property="icon"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, d_id, `name`, description, color_id, icon, create_by, create_time, update_by,
+        update_time, deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from position_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.PositionT"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into position_t (d_id, `name`, description, color_id, icon, create_by, create_time,
+        update_by, update_time, deleted)
+        values (#{dId}, #{name}, #{description}, #{colorId}, #{icon}, #{createBy}, #{createTime},
+        #{updateBy}, #{updateTime}, #{deleted})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.PositionT" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into position_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dId != null">
+                d_id,
+            </if>
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="description != null and description != ''">
+                description,
+            </if>
+            <if test="colorId != null">
+                color_id,
+            </if>
+            <if test="icon != null and icon != ''">
+                icon,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dId != null">
+                #{dId},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="colorId != null">
+                #{colorId},
+            </if>
+            <if test="icon != null and icon != ''">
+                #{icon},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.PositionT">
+        <!--@mbg.generated-->
+        update position_t
+        <set>
+            <if test="dId != null">
+                d_id = #{dId},
+            </if>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="colorId != null">
+                color_id = #{colorId},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.PositionT">
+        <!--@mbg.generated-->
+        update position_t
+        set d_id = #{dId},
+        `name` = #{name},
+        description = #{description},
+        color_id = #{colorId},
+        icon = #{icon},
+        create_by = #{createBy},
+        create_time = #{createTime},
+        update_by = #{updateBy},
+        update_time = #{updateTime},
+        deleted = #{deleted}
+        where id = #{id}
+    </update>
+
+    <resultMap id="positionDto" type="com.haylion.common.entity.dto.PositionDto">
+        <id column="id" property="id"/>
+        <result column="dId" property="dId"/>
+        <result column="dName" property="dName"/>
+        <result column="cId" property="cId"/>
+        <result column="cName" property="cName"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="icon" property="icon"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <association property="colorDict" column="colorId" javaType="com.haylion.common.entity.entity.ColorDict">
+            <id column="colorDictId" property="id"/>
+            <result column="colorName" property="name"/>
+            <result column="colorValue" property="value"/>
+            <result column="colorSourceType" property="sourceType"/>
+        </association>
+    </resultMap>
+
+    <select id="selectList" resultMap="positionDto">
+        select
+        hpt.id as id,
+        hdt.id as dId,
+        hdt.name as dName,
+        hpt.name as name,
+        hpt.description as description,
+        hpt.color_id as colorId,
+        hpt.icon as icon,
+        hpt.create_by as create_by,
+        hpt.create_time as create_time,
+        hpt.update_by as update_by,
+        hpt.update_time as update_time,
+        hct.id as cId,
+        hct.name as cName,
+        hcd.id as colorDictId,
+        hcd.name as colorName,
+        hcd.value as colorValue,
+        hcd.source_type as colorSourceType
+        from position_t as hpt
+        left join department_t as hdt on hpt.d_id = hdt.id
+        left join company_t as hct on hdt.c_id = hct.id
+        left join color_dict as hcd on hpt.color_id = hcd.id
+        <where>
+            <if test="name != null and name != ''">
+                and hpt.name like concat('%',#{name},'%')
+            </if>
+            <if test="cId != null">
+                and hct.id = #{cId}
+            </if>
+            <if test="dId != null">
+                and hdt.id = #{dId}
+            </if>
+            and hpt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+        order by hpt.create_time desc
+    </select>
+    <select id="selectByNameAndDId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from position_t as hpt
+        where
+        hpt.name like concat('%',#{name},'%')
+        and hpt.d_id = #{dId}
+        and hpt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </select>
+    <select id="selectPositionExitByDId" resultType="java.lang.Boolean">
+        SELECT  IFNULL(
+        (select 1
+        from position_t as hpt
+        where hpt.d_id = #{dId}
+        and hpt.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        limit 1),0)
+  </select>
+
+    <resultMap id="positionInfoDto" type="com.haylion.common.entity.dto.PositionInfoDto">
+        <id column="id" property="id"/>
+        <result column="dId" property="dId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="icon" property="icon"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <association property="colorDict" column="colorId" javaType="com.haylion.common.entity.entity.ColorDict">
+            <id column="colorDictId" property="id"/>
+            <result column="colorName" property="name"/>
+            <result column="colorValue" property="value"/>
+            <result column="colorSourceType" property="sourceType"/>
+        </association>
+    </resultMap>
+    <select id="selectInfo" resultMap="positionInfoDto">
+        select
+        hpt.id as id,
+        hpt.d_id as dId,
+        hpt.name as name,
+        hpt.description as description,
+        hpt.color_id as colorId,
+        hpt.icon as icon,
+        hpt.create_by as create_by,
+        hpt.create_time as create_time,
+        hpt.update_by as update_by,
+        hpt.update_time as update_time,
+        hdt.c_id as cId,
+        hcd.id as colorDictId,
+        hcd.name as colorName,
+        hcd.value as colorValue,
+        hcd.source_type as colorSourceType
+        from position_t as hpt
+        left join department_t as hdt on hpt.d_id = hdt.id
+        left join color_dict as hcd on hpt.color_id = hcd.id
+        <where>
+            <if test="id != null">
+                and hpt.id = #{id}
+            </if>
+        </where>
+
+    </select>
+</mapper>

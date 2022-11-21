@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: ${charge_env:dev}
+  application:
+    name: charge-user
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.100.96:8848
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        namespace: aca1acb2-e8b1-4fc9-80db-2ec2a12fafc9
+        group: charge
+      discovery:
+        server-addr: 192.168.100.96:8848
+        namespace: aca1acb2-e8b1-4fc9-80db-2ec2a12fafc9
+        group: charge
+log:
+  path: ../log
+  moduleName: ${spring.application.name}
+  level: debug
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.haylion: debug
+    com.haylion.common.repository.mapper: debug
+    com.haylion.common.log.client: info
+

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.SiteNoticeUserMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.SiteNoticeUser">
+
+        <id column="id" property="id"/>
+        <result column="site_notice_id" property="siteNoticeId"/>
+        <result column="user_id" property="userId"/>
+        <result column="state" property="state"/>
+        <result column="read_time" property="readTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    
+    id, site_notice_id, user_id, `state`, read_time, deleted
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from site_notice_user
+        where id = #{id}
+    </select>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.SiteNoticeUser" useGeneratedKeys="true">
+
+        insert into site_notice_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="siteNoticeId != null">
+                site_notice_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="readTime != null">
+                read_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="siteNoticeId != null">
+                #{siteNoticeId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="readTime != null">
+                #{readTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.SiteNoticeUser">
+
+        update site_notice_user
+        <set>
+            <if test="siteNoticeId != null">
+                site_notice_id = #{siteNoticeId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+            <if test="readTime != null">
+                read_time = #{readTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+
+        insert into site_notice_user
+        (site_notice_id, user_id, `state`, read_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.siteNoticeId}, #{item.userId}, #{item.state},#{item.readTime},
+            #{item.deleted})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertByUserId" >
+        insert into site_notice_user
+        (site_notice_id, user_id, `state` )
+        values
+        <foreach collection="userIdCollection" item="userId" separator=",">
+            (#{siteNoticeId}, #{userId}, #{state})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.SiteNoticeUser" useGeneratedKeys="true">
+
+        insert into site_notice_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            site_notice_id,
+            user_id,
+            `state`,
+            read_time,
+            deleted,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            #{siteNoticeId},
+            #{userId},
+            #{state},
+            #{readTime},
+            #{deleted},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            site_notice_id = #{siteNoticeId},
+            user_id = #{userId},
+            `state` = #{state},
+            read_time = #{readTime},
+            deleted = #{deleted},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.SiteNoticeUser" useGeneratedKeys="true">
+
+        insert into site_notice_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="siteNoticeId != null">
+                site_notice_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="readTime != null">
+                read_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="siteNoticeId != null">
+                #{siteNoticeId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="readTime != null">
+                #{readTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="siteNoticeId != null">
+                site_notice_id = #{siteNoticeId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+            <if test="readTime != null">
+                read_time = #{readTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByUserIdAndStateAndReadTimeBetween" resultType="com.haylion.common.entity.dto.SiteNoticeDto">
+        select
+        ssns.source_id as sourceId,
+        ssns.source_type as sourceType,
+        ssns.content_type as contentType,
+        ssns.source_content as sourceContent,
+        ssns.remind_time as remindTime,
+        ssns.create_time as createTime,
+        ssnu.id as noticeUserId,
+        ssnu.site_notice_id as siteNoticeId,
+        ssnu.state as state,
+        ssnu.read_time as readTime
+        from site_notice_user as ssnu
+        left join site_notice_source as ssns on ssns.id = ssnu.site_notice_id
+        <where>
+            <if test="userId != null">
+                and ssnu.user_id=#{userId}
+            </if>
+            <if test="state != null">
+                and ssnu.`state`=#{state}
+            </if>
+            <if test="sourceTypeCollection != null and sourceTypeCollection.size() > 0">
+                and ssns.source_type in
+                <foreach item="item" index="index" collection="sourceTypeCollection"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="contentTypeCollection != null and contentTypeCollection.size() > 0">
+                and ssns.content_type in
+                <foreach item="item" index="index" collection="contentTypeCollection"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="startRemindTime != null">
+                and ssns.remind_time <![CDATA[>=]]> #{startRemindTime}
+            </if>
+            <if test="endRemindTime != null">
+                and ssns.remind_time <![CDATA[<=]]> #{endRemindTime}
+            </if>
+            and ssnu.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+            and ssns.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+        order by ssns.remind_time desc
+    </select>
+
+    <update id="deletedByIdIn">
+        update site_notice_user
+        set deleted = ${@com.yelink.metro.common.core.constant.CommonConstant@DELETED_YES}
+        <where>
+            <if test="idCollection != null and idCollection.size() > 0">
+                and id in
+                <foreach item="item" index="index" collection="idCollection"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <update id="updateStateByIdInAndUserId">
+        update site_notice_user
+        set `state`=#{updatedState}
+        <where>
+            <if test="idCollection != null and idCollection.size() > 0">
+                and id in
+                <foreach item="item" index="index" collection="idCollection"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </update>
+    <select id="selectCountByUserIdAndStateAndReadTimeBetween" resultType="long">
+        select
+        count(*)
+        from site_notice_user as ssnu
+        left join site_notice_source as ssns on ssns.id = ssnu.site_notice_id
+        <where>
+            <if test="userId != null">
+                and ssnu.user_id=#{userId}
+            </if>
+            <if test="state != null">
+                and ssnu.`state`=#{state}
+            </if>
+            <if test="startRemindTime != null">
+                and ssns.remind_time <![CDATA[>=]]> #{startRemindTime}
+            </if>
+            <if test="endRemindTime != null">
+                and ssns.remind_time <![CDATA[<=]]> #{endRemindTime}
+            </if>
+            and ssnu.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+            and ssns.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+    </select>
+</mapper>

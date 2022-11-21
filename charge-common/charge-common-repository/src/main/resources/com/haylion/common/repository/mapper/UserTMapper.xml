@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.UserTMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.UserT">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="username" property="username"/>
+        <result column="mobile" property="mobile"/>
+        <result column="email" property="email"/>
+        <result column="card" property="card"/>
+        <result column="head_icon_url" property="headIconUrl"/>
+        <result column="c_id" property="cId"/>
+        <result column="d_id" property="dId"/>
+        <result column="p_id" property="pId"/>
+        <result column="login_permission" property="loginPermission"/>
+        <result column="password" property="password"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="password_modified" property="passwordModified"/>
+        <result column="message_state" property="messageState"/>
+        <result column="remark" property="remark"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, `name`, username, mobile, email, card, head_icon_url, c_id, d_id, p_id, login_permission,
+    `password`, `state`, create_time, create_by, update_time, update_by, password_modified, 
+    message_state, remark, deleted
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.UserT"
+            useGeneratedKeys="true">
+    insert into user_t (`name`, username, mobile, email, card, head_icon_url, c_id,
+      d_id, p_id, login_permission, `password`, `state`, create_time, create_by, 
+      update_time, update_by, password_modified, message_state, remark, deleted
+      )
+    values (#{name}, #{username}, #{mobile}, #{email}, #{card}, #{headIconUrl}, #{cId}, 
+      #{dId}, #{pId}, #{loginPermission}, #{password}, #{state}, #{createTime}, #{createBy}, 
+      #{updateTime}, #{updateBy}, #{passwordModified}, #{messageState}, #{remark}, #{deleted}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.UserT" useGeneratedKeys="true">
+        insert into user_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="username != null and username != ''">
+                username,
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile,
+            </if>
+            <if test="email != null and email != ''">
+                email,
+            </if>
+            <if test="card != null and card != ''">
+                card,
+            </if>
+            <if test="headIconUrl != null and headIconUrl != ''">
+                head_icon_url,
+            </if>
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="dId != null">
+                d_id,
+            </if>
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="loginPermission != null">
+                login_permission,
+            </if>
+            <if test="password != null and password != ''">
+                `password`,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+            <if test="passwordModified != null">
+                password_modified,
+            </if>
+            <if test="messageState != null">
+                message_state,
+            </if>
+            <if test="remark != null and remark != ''">
+                remark,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="username != null and username != ''">
+                #{username},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                #{mobile},
+            </if>
+            <if test="email != null and email != ''">
+                #{email},
+            </if>
+            <if test="card != null and card != ''">
+                #{card},
+            </if>
+            <if test="headIconUrl != null and headIconUrl != ''">
+                #{headIconUrl},
+            </if>
+            <if test="cId != null">
+                #{cId},
+            </if>
+            <if test="dId != null">
+                #{dId},
+            </if>
+            <if test="pId != null">
+                #{pId},
+            </if>
+            <if test="loginPermission != null">
+                #{loginPermission},
+            </if>
+            <if test="password != null and password != ''">
+                #{password},
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy},
+            </if>
+            <if test="passwordModified != null">
+                #{passwordModified},
+            </if>
+            <if test="messageState != null">
+                #{messageState},
+            </if>
+            <if test="remark != null and remark != ''">
+                #{remark},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.UserT">
+        <!--@mbg.generated-->
+        update user_t
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="card != null and card != ''">
+                card = #{card},
+            </if>
+            <if test="headIconUrl != null and headIconUrl != ''">
+                head_icon_url = #{headIconUrl},
+            </if>
+            <if test="cId != null">
+                c_id = #{cId},
+            </if>
+            <if test="dId != null">
+                d_id = #{dId},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId},
+            </if>
+            <if test="loginPermission != null">
+                login_permission = #{loginPermission},
+            </if>
+            <if test="password != null and password != ''">
+                `password` = #{password},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="passwordModified != null">
+                password_modified = #{passwordModified},
+            </if>
+            <if test="messageState != null">
+                message_state = #{messageState},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.UserT">
+    update user_t
+    set `name` = #{name},
+      username = #{username},
+      mobile = #{mobile},
+      email = #{email},
+      card = #{card},
+      head_icon_url = #{headIconUrl},
+      c_id = #{cId},
+      d_id = #{dId},
+      p_id = #{pId},
+      login_permission = #{loginPermission},
+      `password` = #{password},
+      `state` = #{state},
+      create_time = #{createTime},
+      create_by = #{createBy},
+      update_time = #{updateTime},
+      update_by = #{updateBy},
+      password_modified = #{passwordModified},
+      message_state = #{messageState},
+      remark = #{remark},
+      deleted = #{deleted}
+    where id = #{id}
+  </update>
+    <select id="selectByLowerUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_t as hut
+        where LOWER(hut.username) = LOWER(#{username})
+        and hut.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </select>
+    <select id="selectResourceCodeByUserId" resultType="java.lang.String">
+        SELECT hrt.code
+        FROM user_role_t as hurt
+        left join role_resource_t as hrrt on hurt.role_id = hrrt.role_id
+        left join resource_t as hrt on hrt.id = hrrt.resource_id
+        where hurt.user_id = #{userId}
+        and hrt.code is not null
+  </select>
+    <select id="selectRoleCodesByUserId" resultType="java.lang.String">
+        select hrt.code
+        from user_role_t as hurt
+        left join role_t as hrt on hrt.id = hurt.role_id
+        where hurt.user_id = #{userId}
+  </select>
+    <select id="selectByLowerUsernameOrMobile" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_t as hut
+        <where>
+            <if test="mobile != null and mobile != ''">
+                and (hut.mobile = #{mobile})
+            </if>
+            <if test="username != null and username != ''">
+                or hut.username = #{username}
+            </if>
+        </where>
+        having hut.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </select>
+    <select id="getUserDetail" resultType="com.haylion.common.entity.dto.UserDetailDto">
+        select
+        hut.id as id,
+        hut.name as name,
+        hut.username as username,
+        hut.mobile as mobile,
+        hut.email as email,
+        hut.card as card,
+        hut.head_icon_url as headIconUrl,
+        hut.c_id as cId,
+        hct.name as cName,
+        hut.d_id as dId,
+        hdt.name as dName,
+        hut.p_id as pId,
+        hpt.name as pName,
+        hrt.id as roleId,
+        hrt.name as roleName,
+        hut.state as state,
+        hut.login_permission as loginPermission,
+        hut.create_time as createTime,
+        hut.create_by as createBy,
+        hut.update_time as updateTime,
+        hut.update_by as updateBy,
+        hut.password_modified as passwordModified,
+        hut.message_state as messageState,
+        hut.remark as remark
+        from user_t as hut
+        left join user_role_t as hurt on hurt.user_id = hut.id
+        left join role_t as hrt on hrt.id = hurt.role_id
+        left join company_t as hct on hct.id = hut.c_id
+        left join department_t as hdt on hdt.id = hut.d_id
+        left join position_t as hpt on hpt.id = hut.p_id
+        where hut.id = #{userId}
+    </select>
+    <select id="selectList" resultType="com.haylion.common.entity.dto.UserDetailDto">
+        select
+        hut.id as id,
+        hut.name as name,
+        hut.username as username,
+        hut.mobile as mobile,
+        hut.email as email,
+        hut.card as card,
+        hut.head_icon_url as headIconUrl,
+        hut.c_id as cId,
+        hct.name as cName,
+        hut.d_id as dId,
+        hdt.name as dName,
+        hut.p_id as pId,
+        hpt.name as pName,
+        hrt.id as roleId,
+        hrt.name as roleName,
+        hut.state as state,
+        hut.login_permission as loginPermission,
+        hut.create_time as createTime,
+        hut.create_by as createBy,
+        hut.update_time as updateTime,
+        hut.update_by as updateBy,
+        hut.password_modified as passwordModified,
+        hut.message_state as messageState,
+        hut.remark as remark
+        from user_t as hut
+        left join user_role_t as hurt on hurt.user_id = hut.id
+        left join role_t as hrt on hrt.id = hurt.role_id
+        left join company_t as hct on hct.id = hut.c_id
+        left join department_t as hdt on hdt.id = hut.d_id
+        left join position_t as hpt on hpt.id = hut.p_id
+        <where>
+            <if test="name != null and name != ''">
+                and hut.name like concat('%',#{name},'%')
+            </if>
+            <if test="username != null and username != ''">
+                and hut.username like concat('%',#{username},'%')
+            </if>
+            <if test="card != null and card != ''">
+                and hut.card like concat('%',#{card},'%')
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and hut.mobile like concat('%',#{mobile},'%')
+            </if>
+            <if test="states != null and states.length != 0">
+                and hut.state in
+                <foreach collection="states" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="cId != null">
+                and hut.c_id =#{cId}
+            </if>
+            <if test="dId != null">
+                and hut.d_id =#{dId}
+            </if>
+            <if test="pId != null">
+                and hut.p_id =#{pId}
+            </if>
+            and hut.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+        order by hut.create_time desc
+
+    </select>
+
+    <update id="updatePassword">
+        update user_t
+        SET password = #{password}, password_modified = ${@com.haylion.charge.user.constant.UserConstant@PASSWORD_FIRST_MODIFY_FLAG_YES}
+        where id = #{id}
+          and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+    </update>
+    <delete id="updatePasswordByMobile">
+        update user_t
+        <set>
+            password = #{password},
+            update_time = NOW(),
+            password_modified = ${@com.haylion.charge.user.constant.UserConstant@PASSWORD_FIRST_MODIFY_FLAG_YES}
+        </set>
+        <where>
+            mobile = #{mobile}
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+    </delete>
+    <select id="selectUserExitByPId" resultType="boolean">
+        SELECT  IFNULL(
+        (select 1
+        from user_t as hut
+        where hut.p_id = #{pId}
+        and hut.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        limit 1),0)
+    </select>
+
+    <select id="selectIdsBySupplierCode" resultType="integer">
+        select us.id from user_t us
+            left join company_t company on us.c_id = company.id and company.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        where us.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+          and company.supplier_code = #{supplierCode}
+    </select>
+</mapper>

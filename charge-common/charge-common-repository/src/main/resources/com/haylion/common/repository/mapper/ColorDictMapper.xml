@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.ColorDictMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.ColorDict">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="deleted" property="deleted"/>
+        <result column="source_type" property="sourceType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, `value`, deleted, source_type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from color_dict
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.ColorDict"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into color_dict (`name`, `value`, deleted, source_type)
+        values (#{name}, #{value}, #{deleted}, #{sourceType})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ColorDict" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into color_dict
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="value != null and value != ''">
+                `value`,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="value != null and value != ''">
+                #{value},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.ColorDict">
+        <!--@mbg.generated-->
+        update color_dict
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="value != null and value != ''">
+                `value` = #{value},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.ColorDict">
+        <!--@mbg.generated-->
+        update color_dict
+        set `name` = #{name},
+        `value` = #{value},
+        deleted = #{deleted},
+        source_type = #{sourceType}
+        where id = #{id}
+    </update>
+    <select id="selectNameExists" resultType="boolean">
+            SELECT EXISTS(
+            SELECT 1 FROM color_dict
+            WHERE `name` = #{name}
+            and source_type = #{sourceType}
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+            )
+  </select>
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from color_dict
+        <where>
+            <if test="name != null and name != ''">
+                and `name` = #{name}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+
+    </select>
+
+    <select id="selectByNameAndSourceType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from color_dict
+        <where>
+            <if test="name != null and name != ''">
+                and `name`=#{name}
+            </if>
+            <if test="sourceType != null">
+                and source_type=#{sourceType}
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.haylion</groupId>
+        <artifactId>charge-common</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>charge-common-notice</artifactId>
+    <description>站内信的通用模块</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.haylion</groupId>
+            <artifactId>charge-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.haylion</groupId>
+            <artifactId>charge-common-repository</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.haylion</groupId>
+            <artifactId>charge-common-entity</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+</project>

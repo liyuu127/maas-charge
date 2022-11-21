@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.RoleTMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.RoleT">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="description" property="description"/>
+        <result column="icon" property="icon"/>
+        <result column="color" property="color"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+
+    id, `name`, code, description, icon, color, create_time, create_by, update_time, 
+    update_by
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from role_t
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.RoleT"
+            useGeneratedKeys="true">
+
+    insert into role_t (`name`, code, description, icon, color, create_time, create_by,
+      update_time, update_by)
+    values (#{name}, #{code}, #{description}, #{icon}, #{color}, #{createTime}, #{createBy}, 
+      #{updateTime}, #{updateBy})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.RoleT" useGeneratedKeys="true">
+
+        insert into role_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="code != null and code != ''">
+                code,
+            </if>
+            <if test="description != null and description != ''">
+                description,
+            </if>
+            <if test="icon != null and icon != ''">
+                icon,
+            </if>
+            <if test="color != null and color != ''">
+                color,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="code != null and code != ''">
+                #{code},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="icon != null and icon != ''">
+                #{icon},
+            </if>
+            <if test="color != null and color != ''">
+                #{color},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.RoleT">
+
+        update role_t
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="color != null and color != ''">
+                color = #{color},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.RoleT">
+
+    update role_t
+    set `name` = #{name},
+      code = #{code},
+      description = #{description},
+      icon = #{icon},
+      color = #{color},
+      create_time = #{createTime},
+      create_by = #{createBy},
+      update_time = #{updateTime},
+      update_by = #{updateBy}
+    where id = #{id}
+  </update>
+    <select id="selectList" resultType="com.haylion.common.entity.dto.RoleDto">
+        select
+        hrt.id as id,
+        hrt.name as name,
+        hrt.code as code,
+        hrt.description as description,
+        hrt.icon as icon,
+        hrt.color as color,
+        hrt.create_time as createTime,
+        hrt.create_by as createBy,
+        hrt.update_time as updateTime,
+        hrt.update_by as updateBy,
+        GROUP_CONCAT(hret.name) as resources
+        from role_t as hrt
+        left join role_resource_t as hrrt on hrrt.role_id = hrt.id
+        left join resource_t as hret on hret.id = hrrt.resource_id
+        <where>
+            <if test="name != null and name != ''">
+                and hrt.name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and hrt.code = #{code}
+            </if>
+        </where>
+        GROUP BY hrt.id
+    </select>
+
+    <resultMap id="roleDetailDto" type="com.haylion.common.entity.dto.RoleDetailDto">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="description" property="description"/>
+        <result column="icon" property="icon"/>
+        <result column="color" property="color"/>
+        <result column="createTime" property="createTime"/>
+        <result column="createBy" property="createBy"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="updateBy" property="updateBy"/>
+        <collection property="resourceDtoList" ofType="com.haylion.common.entity.dto.ResourceDto"
+                    javaType="java.util.List">
+            <id column="resourceId" property="id"/>
+            <result column="resourceName" property="name"/>
+            <result column="pId" property="pId"/>
+            <result column="type" property="type"/>
+            <result column="group" property="group"/>
+            <result column="code" property="code"/>
+            <result column="method" property="method"/>
+            <result column="path" property="path"/>
+            <result column="note" property="note"/>
+            <result column="status" property="status"/>
+        </collection>
+    </resultMap>
+    <select id="queryInfo" resultMap="roleDetailDto">
+    select
+    hrt.id as id,
+    hrt.name as name,
+    hrt.code as code,
+    hrt.description as description,
+    hrt.icon as icon,
+    hrt.color as color,
+    hrt.create_time as createTime,
+    hrt.create_by as createBy,
+    hrt.update_time as updateTime,
+    hrt.update_by as updateBy,
+    hrct.id as resourceId,
+    hrct.name as resourceName,
+    hrct.p_id as pId,
+    hrct.type as type,
+    hrct.`group` as `group`,
+    hrct.method as method,
+    hrct.path as path,
+    hrct.note as note,
+    hrct.status as status
+
+    from role_t as hrt
+    left join role_resource_t as hrrt on hrrt.role_id = hrt.id
+    left join resource_t as hrct on hrct.id = hrrt.resource_id
+    where hrt.id = #{id}
+    </select>
+    <select id="selectByNameOrCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from role_t as hrt
+        <where>
+            <if test="name != null and name != ''">
+                and (hrt.name = #{name})
+            </if>
+            <if test="code != null and code != ''">
+                or hrt.code = #{code}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteById">
+        delete
+        from role_t
+        where id = #{id}
+    </delete>
+</mapper>

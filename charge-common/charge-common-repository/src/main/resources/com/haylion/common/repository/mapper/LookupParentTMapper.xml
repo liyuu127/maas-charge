@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.LookupParentTMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.LookupParentT">
+
+    <id column="id" property="id" />
+    <result column="value" property="value" />
+    <result column="name" property="name" />
+    <result column="description" property="description" />
+    <result column="app_name" property="appName" />
+    <result column="status" property="status" />
+    <result column="create_by" property="createBy" />
+    <result column="update_by" property="updateBy" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    id, `value`, `name`, description, app_name, `status`, create_by, update_by, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from lookup_parent_t
+    where id = #{id}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.LookupParentT" useGeneratedKeys="true">
+
+    insert into lookup_parent_t (`value`, `name`, description, app_name, `status`, create_by, update_by,
+      create_time, update_time)
+    values (#{value}, #{name}, #{description}, #{appName}, #{status}, #{createBy}, #{updateBy}, 
+      #{createTime}, #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.LookupParentT" useGeneratedKeys="true">
+
+    insert into lookup_parent_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="value != null and value != ''">
+        `value`,
+      </if>
+      <if test="name != null and name != ''">
+        `name`,
+      </if>
+      <if test="description != null and description != ''">
+        description,
+      </if>
+      <if test="appName != null and appName != ''">
+        app_name,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by,
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="value != null and value != ''">
+        #{value},
+      </if>
+      <if test="name != null and name != ''">
+        #{name},
+      </if>
+      <if test="description != null and description != ''">
+        #{description},
+      </if>
+      <if test="appName != null and appName != ''">
+        #{appName},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        #{updateBy},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.LookupParentT">
+
+    update lookup_parent_t
+    <set>
+      <if test="value != null and value != ''">
+        `value` = #{value},
+      </if>
+      <if test="name != null and name != ''">
+        `name` = #{name},
+      </if>
+      <if test="description != null and description != ''">
+        description = #{description},
+      </if>
+      <if test="appName != null and appName != ''">
+        app_name = #{appName},
+      </if>
+      <if test="status != null">
+        `status` = #{status},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by = #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by = #{updateBy},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.LookupParentT">
+
+    update lookup_parent_t
+    set `value` = #{value},
+      `name` = #{name},
+      description = #{description},
+      app_name = #{appName},
+      `status` = #{status},
+      create_by = #{createBy},
+      update_by = #{updateBy},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+    <select id="list" resultType="com.haylion.common.entity.entity.LookupParentT">
+        select *
+        from lookup_parent_t
+        <where>
+            <if test="value != null and value != ''">
+                and value like concat('%', #{value}, '%')
+            </if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="integer">
+        delete
+        from lookup_parent_t
+        where id = #{id}
+    </delete>
+
+    <select id="countByValue" resultType="int">
+        select count(id)
+        from lookup_parent_t where value = #{value}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+    </select>
+    <select id="selectByValue" resultType="com.haylion.common.entity.entity.LookupParentT">
+        select *
+        from lookup_parent_t
+        where value = #{value,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getInfo" resultType="com.haylion.common.entity.entity.LookupParentT">
+        select *
+        from lookup_parent_t
+        where value = #{value}
+    </select>
+</mapper>

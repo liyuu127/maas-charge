@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.ProjectTMapper">
+  <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.ProjectT">
+
+    <id column="id" property="id" />
+    <result column="title" property="title" />
+    <result column="img" property="img" />
+    <result column="content" property="content" />
+    <result column="create_by" property="createBy" />
+    <result column="update_by" property="updateBy" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    id, title, img, content, create_by, update_by, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from project_t
+    where id = #{id}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.ProjectT" useGeneratedKeys="true">
+
+    insert into project_t (title, img, content, create_by, update_by, create_time, update_time
+      )
+    values (#{title}, #{img}, #{content}, #{createBy}, #{updateBy}, #{createTime}, #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.ProjectT" useGeneratedKeys="true">
+
+    insert into project_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null and title != ''">
+        title,
+      </if>
+      <if test="img != null and img != ''">
+        img,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by,
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null and title != ''">
+        #{title},
+      </if>
+      <if test="img != null and img != ''">
+        #{img},
+      </if>
+      <if test="content != null and content != ''">
+        #{content},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        #{updateBy},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.ProjectT">
+
+    update project_t
+    <set>
+      <if test="title != null and title != ''">
+        title = #{title},
+      </if>
+      <if test="img != null and img != ''">
+        img = #{img},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content},
+      </if>
+      <if test="createBy != null and createBy != ''">
+        create_by = #{createBy},
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        update_by = #{updateBy},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.ProjectT">
+
+    update project_t
+    set title = #{title},
+      img = #{img},
+      content = #{content},
+      create_by = #{createBy},
+      update_by = #{updateBy},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+</mapper>
