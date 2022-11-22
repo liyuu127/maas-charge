@@ -1,4 +1,4 @@
-package com.haylion.charge.common.sms.listener;
+package com.haylion.common.sms.listener;
 
 import com.aliyun.mns.model.Message;
 import lombok.extern.slf4j.Slf4j;

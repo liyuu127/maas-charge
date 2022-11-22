@@ -3,7 +3,7 @@ package com.haylion.common.notice.util;
 import com.haylion.common.core.exception.ApplicationException;
 import com.haylion.common.notice.constant.RetStubDetail;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.MessageFormat;
 import java.time.LocalDate;

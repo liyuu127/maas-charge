@@ -3,8 +3,8 @@ package com.haylion.charge.system.service;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.haylion.common.core.exception.ApplicationException;
-import com.haylion.charge.common.sms.model.AliyunSmsSendParam;
-import com.haylion.charge.common.sms.service.AliyunMsgService;
+import com.haylion.common.sms.model.AliyunSmsSendParam;
+import com.haylion.common.sms.service.AliyunMsgService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;

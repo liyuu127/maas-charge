@@ -4,10 +4,11 @@ import com.haylion.common.core.exception.ApplicationException;
 import com.haylion.common.core.exception.SysStubInfo;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -85,7 +86,10 @@ public class RedisDistributedLock implements DistributedLock {
         // 随机生成一个value
         requireToken = UUID.randomUUID().toString();
         while (System.currentTimeMillis() < end) {
-            String result = jedis.set(lockKey, requireToken, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
+            SetParams setParams = new SetParams()
+                    .nx()
+                    .px(expireTime);
+            String result = jedis.set(lockKey, requireToken, setParams);
             if (LOCK_SUCCESS.equals(result)) {
                 return requireToken;
             }

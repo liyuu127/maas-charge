@@ -1,7 +1,6 @@
 package com.haylion.common.core.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.haylion.common.core.exception.ApplicationException;
 import com.haylion.common.core.exception.SysStubInfo;
 import lombok.Data;
@@ -36,7 +35,6 @@ public class FeignResponseData<T> implements Serializable {
      * 当前服务器时间
      * 格式yyyy-MM-dd HH:mm:ss
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date time = new Date();
     /**
      * 业务数据

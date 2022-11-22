@@ -1,4 +1,4 @@
-package com.haylion.charge.common.sms.model;
+package com.haylion.common.sms.model;
 
 
 /**

@@ -2,14 +2,13 @@ package com.haylion.common.redis.util;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +21,7 @@ public class RedisUtil {
     private static RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
-    public void setRedisTemplate(RedisTemplate<String,Object> redisTemplate) {
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         log.debug("redisTemple加载");
         RedisUtil.redisTemplate = redisTemplate;
     }
@@ -84,6 +83,7 @@ public class RedisUtil {
 
     /**
      * 获取redis 缓存以字符串形式返回
+     *
      * @param key
      * @return
      */
@@ -117,7 +117,7 @@ public class RedisUtil {
      * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
-    public static boolean set(String key, Object value, long time,TimeUnit timeUnit) {
+    public static boolean set(String key, Object value, long time, TimeUnit timeUnit) {
         try {
             if (time > 0) {
                 redisTemplate.opsForValue().set(key, value, time, timeUnit);
@@ -141,7 +141,8 @@ public class RedisUtil {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
+                List<String> objects = (List<String>) CollectionUtils.arrayToList(key);
+                redisTemplate.delete(objects);
             }
         }
     }
@@ -153,19 +154,19 @@ public class RedisUtil {
      * @param key 可以传一个值 或多个
      */
     public static boolean isExist(String key) {
-        return  redisTemplate.hasKey(key);
+        return redisTemplate.hasKey(key);
     }
 
     public static <T> T getAndConvert(String key, Class<T> descType) {
-            String valueStr = getValueStr(key);
-            return StringUtils.isBlank(valueStr) ? null : JSONObject.parseObject(valueStr, descType);
+        String valueStr = getValueStr(key);
+        return StringUtils.isBlank(valueStr) ? null : JSONObject.parseObject(valueStr, descType);
     }
 
-    public static Set<String> keys(String kePattern){
+    public static Set<String> keys(String kePattern) {
         return redisTemplate.keys(kePattern);
     }
 
-    public static void batchUpdate(Map<String,Object> data){
+    public static void batchUpdate(Map<String, Object> data) {
         redisTemplate.opsForValue().multiSet(data);
     }
 }

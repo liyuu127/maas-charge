@@ -1,11 +1,11 @@
-package com.haylion.charge.common.sms.service;
+package com.haylion.common.sms.service;
 
 import com.alibaba.cloud.spring.boot.sms.ISmsService;
 import com.aliyuncs.dysmsapi.model.v20170525.*;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
-import com.haylion.charge.common.sms.model.AliyunSmsBatchSendParam;
-import com.haylion.charge.common.sms.model.AliyunSmsSendParam;
+import com.haylion.common.sms.model.AliyunSmsBatchSendParam;
+import com.haylion.common.sms.model.AliyunSmsSendParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

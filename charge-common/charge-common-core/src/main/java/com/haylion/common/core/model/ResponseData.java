@@ -1,6 +1,5 @@
 package com.haylion.common.core.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.haylion.common.core.exception.RetStub;
 import com.haylion.common.core.exception.SysStubInfo;
 import lombok.Data;
@@ -12,7 +11,6 @@ import java.io.Serializable;
  * @Description 响应信息主体
  */
 @Data
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ResponseData<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;

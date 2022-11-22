@@ -2,7 +2,7 @@ package com.haylion.charge.auth.client.factory;
 
 import com.haylion.charge.auth.client.UserRemoteClient;
 import com.haylion.charge.auth.client.fallback.UserRemoteFallbackImpl;
-import feign.hystrix.FallbackFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 /**

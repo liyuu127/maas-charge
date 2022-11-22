@@ -2,7 +2,7 @@ package com.haylion.common.log.client.factory;
 
 import com.haylion.common.log.client.SysLogRemoteClient;
 import com.haylion.common.log.client.fallback.SysLogRemoteFallbackImpl;
-import feign.hystrix.FallbackFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 /**
