@@ -7,7 +7,6 @@ variables:
   JAR_SUFFIX: 1.0-SNAPSHOT
   MODULE1: charge-auth
   MODULE2: charge-gateway
-  MODULE3: charge-order
   MODULE4: charge-user
   MODULE5: charge-system
   MODULE6: charge-job
@@ -26,7 +25,7 @@ charge-auth_dev:
     - mvn clean package -e -Dmaven.test.skip=true
     - scp ${MODULE1}/target/${MODULE1}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE1}/.
     - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-auth-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE1}/ ; nohup java -jar ${MODULE1}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}  --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
+    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE1}/ ; nohup java -jar ${MODULE1}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev}   --spring.cloud.nacos.config.server-addr=${nacos_server_dev} >> /dev/null 2>&1 &"
   tags:
     - dev
 
@@ -40,23 +39,10 @@ charge-gateway_dev:
     - mvn clean package -e -Dmaven.test.skip=true
     - scp ${MODULE2}/target/${MODULE2}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE2}/.
     - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-gateway-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE2}/ ; nohup java -jar ${MODULE2}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}  --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
+    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE2}/ ; nohup java -jar ${MODULE2}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev}   --spring.cloud.nacos.config.server-addr=${nacos_server_dev} >> /dev/null 2>&1 &"
   tags:
     - dev
 
-charge-order_dev:
-  stage: deploy
-  when: manual
-  only:
-    - dev
-  script:
-    - ssh ${user_dev}@${host_dev} "[ ! -d ${WEBAPP_DEMO}/${MODULE3} ] && mkdir -p ${WEBAPP_DEMO}/${MODULE3}; echo 1"
-    - mvn clean package -P dev -e -Dmaven.test.skip=true
-    - scp ${MODULE3}/target/${MODULE3}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE3}/.
-    - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-order-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE3}/ ; nohup java -jar ${MODULE3}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}  --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
-  tags:
-    - dev
 
 charge-user_dev:
   stage: deploy
@@ -68,7 +54,7 @@ charge-user_dev:
     - mvn clean package -e -e -Dmaven.test.skip=true
     - scp ${MODULE4}/target/${MODULE4}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE4}/.
     - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-user-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE4}/ ; nohup java -jar ${MODULE4}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}   --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
+    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE4}/ ; nohup java -jar ${MODULE4}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev}    --spring.cloud.nacos.config.server-addr=${nacos_server_dev} >> /dev/null 2>&1 &"
   tags:
     - dev
 
@@ -82,7 +68,7 @@ charge-system_dev:
     - mvn clean package -e -e -Dmaven.test.skip=true
     - scp ${MODULE5}/target/${MODULE5}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE5}/.
     - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-system-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE5}/ ; nohup java -jar ${MODULE5}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}   --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
+    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE5}/ ; nohup java -jar ${MODULE5}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev}    --spring.cloud.nacos.config.server-addr=${nacos_server_dev} >> /dev/null 2>&1 &"
   tags:
     - dev
 
@@ -96,7 +82,7 @@ charge-job_dev:
     - mvn clean package -e -e -Dmaven.test.skip=true
     - scp ${MODULE6}/target/${MODULE6}-${JAR_SUFFIX}.jar ${user_dev}@${host_dev}:${WEBAPP_DEMO}/${MODULE6}/.
     - ssh ${user_dev}@${host_dev} 'kill -9 `pgrep -f charge-job-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE6}/ ; nohup java -jar ${MODULE6}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev} --spring.cloud.nacos.discovery.namespace=${charge_namespace_dev}   --spring.cloud.nacos.config.server-addr=${nacos_server_dev} --spring.cloud.nacos.discovery.server-addr=${nacos_server_dev}>> /dev/null 2>&1 &"
+    - ssh ${user_dev}@${host_dev} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE6}/ ; nohup java -jar ${MODULE6}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_dev}    --spring.cloud.nacos.config.server-addr=${nacos_server_dev} >> /dev/null 2>&1 &"
   tags:
     - dev
 charge-job_pro:
@@ -143,19 +129,6 @@ charge-gateway_pro:
   tags:
     - dev
 
-charge-order_pro:
-  stage: deploy
-  when: manual
-  only:
-    - pro
-  script:
-    - ssh ${user_pro}@${host_pro} "[ ! -d ${WEBAPP_DEMO}/${MODULE3} ] && mkdir -p ${WEBAPP_DEMO}/${MODULE3}; echo 1"
-    - mvn clean package -e -Dmaven.test.skip=true
-    - scp ${MODULE3}/target/${MODULE3}-${JAR_SUFFIX}.jar ${user_pro}@${host_pro}:${WEBAPP_DEMO}/${MODULE3}/.
-    - ssh ${user_pro}@${host_pro} 'kill -9 `pgrep -f charge-order-1.0-SNAPSHOT\.jar` ; echo 1'
-    - ssh ${user_pro}@${host_pro} ". /etc/profile ; cd ${WEBAPP_DEMO}/${MODULE3}/ ; nohup java -jar ${MODULE3}-${JAR_SUFFIX}.jar --spring.cloud.nacos.config.namespace=${charge_namespace_pro} --spring.cloud.nacos.discovery.namespace=${charge_namespace_pro}  --spring.cloud.nacos.config.server-addr=${nacos_server_pro} --spring.cloud.nacos.discovery.server-addr=${nacos_server_pro}>> /dev/null 2>&1 &"
-  tags:
-    - dev
 
 charge-user_pro:
   stage: deploy
