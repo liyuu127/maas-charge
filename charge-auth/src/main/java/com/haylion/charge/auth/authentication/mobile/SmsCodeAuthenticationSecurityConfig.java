@@ -4,6 +4,7 @@ import com.haylion.charge.auth.handler.AuthenticationSuccessHandler;
 import com.haylion.charge.auth.handler.CustomerAuthenticationFailureHandler;
 import com.haylion.charge.auth.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +24,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
     private CustomerAuthenticationFailureHandler preCustomerAuthenticationFailureHandler;
 
     @Autowired
+    @Lazy
     private AuthenticationSuccessHandler preAuthenticationSuccessHandler;
 
 

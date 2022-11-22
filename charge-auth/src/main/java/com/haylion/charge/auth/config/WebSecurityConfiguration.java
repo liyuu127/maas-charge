@@ -5,6 +5,7 @@ import com.haylion.common.auth.token.CustomDelegatingPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Order(90)
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -81,11 +82,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
-    public static void main(String[] args) {
-        PasswordEncoder delegatingPasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String admin = bCryptPasswordEncoder.encode("admin");
-        String admin890 = delegatingPasswordEncoder.encode("admin");
-        System.out.println("admin = " + admin);
-    }
 }

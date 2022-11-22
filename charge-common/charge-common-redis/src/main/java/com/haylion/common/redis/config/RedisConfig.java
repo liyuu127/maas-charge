@@ -13,7 +13,7 @@ import redis.clients.jedis.Jedis;
 
 
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class RedisConfig {
 
     @Bean("stringObjectRedisTemplate")

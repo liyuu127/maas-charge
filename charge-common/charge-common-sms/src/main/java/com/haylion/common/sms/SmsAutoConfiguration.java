@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnWebApplication
 @ComponentScan("com.haylion.common.sms")
-public class OssAutoConfiguration {
+public class SmsAutoConfiguration {
 
 }
 

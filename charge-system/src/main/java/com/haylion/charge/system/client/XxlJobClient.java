@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @RefreshScope
-@FeignClient(value = "xxljob", url = "${charge.xxljob.executor.url}", path = "/")
+@FeignClient(value = "xxljob", url = "${mc.xxljob.executor.url}", path = "/")
 public interface XxlJobClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/run", consumes = "application/json", produces = "application/json")

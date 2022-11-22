@@ -32,19 +32,19 @@ public class SmsSysService {
     AliyunMsgService aliyunMsgService;
     @Autowired
     StringRedisTemplate stringRedisTemplate;
-    @Value("${charge.sms.sign-name}")
+    @Value("${mc.sms.sign-name}")
     String signName;
 
-    @Value("${charge.sms.template-code.login}")
+    @Value("${mc.sms.template-code.login}")
     String loginTemplateCode;
 
-    @Value("${charge.sms.template-code.user-identity}")
+    @Value("${mc.sms.template-code.user-identity}")
     String userIdentityTemplateCode;
 
-    @Value("${charge.sms.template-code.register}")
+    @Value("${mc.sms.template-code.register}")
     String registerTemplateCode;
 
-    @Value("${charge.sms.template-code.update-password}")
+    @Value("${mc.sms.template-code.update-password}")
     String updatePasswordTemplateCode;
 
     public void send(Integer type, String phone, String prefix) throws ClientException {

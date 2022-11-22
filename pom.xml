@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
-    </parent>
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>2.6.3</version>-->
+<!--    </parent>-->
     <groupId>com.haylion</groupId>
     <artifactId>charge</artifactId>
     <version>${revision}</version>
@@ -23,20 +23,15 @@
 
     <properties>
         <revision>1.0-SNAPSHOT</revision>
-        <spring-boot.version>2.4.2</spring-boot.version>
-        <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
-        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-boot.version>2.6.3</spring-boot.version>
         <spring-security-oauth2-autoconfigure.version>2.1.5.RELEASE</spring-security-oauth2-autoconfigure.version>
         <security.oauth.version>2.3.6.RELEASE</security.oauth.version>
         <java.version>1.8</java.version>
         <hutool.version>5.0.5</hutool.version>
         <jasypt.version>2.1.0</jasypt.version>
-        <sbu.version>1.9.3</sbu.version>
         <fastjson.version>1.2.60</fastjson.version>
-        <nacos-client.version>1.1.4</nacos-client.version>
         <netflix-hystrix.version>2.2.10.RELEASE</netflix-hystrix.version>
         <starter-oauth2.version>2.1.0.RELEASE</starter-oauth2.version>
-        <seata.version>0.9.0</seata.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,22 +46,27 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- spring cloud依赖-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2020.0.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!--spring cloud alibaba依赖-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2021.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-dependencies</artifactId>
+                    <version>2.6.3</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-dependencies</artifactId>
+                    <version>2021.0.1</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.alibaba.cloud</groupId>
+                    <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                    <version>2021.0.1.0</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
 
             <dependency>
                 <groupId>org.springframework.security.oauth.boot</groupId>

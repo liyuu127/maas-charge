@@ -7,13 +7,11 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%black(控制台-) %d{yyyy-MM-dd HH:mm:ss.SSS} %green([%thread]) %highlight(%-5level)
-                %boldMagenta(%logger{100}) [%M] Line:%-3L - %cyan(%msg%n)
-            </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level  [%X{TRACE_ID}] %logger{50} -[%M] Line:%-3L- %msg%n</pattern>
         </encoder>
     </appender>
     <!--每个logger都关联到logger上下文，默认上下文名称为“default”。但可以使用设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改,可以通过%contextName来打印日志上下文名称。-->
-    <contextName>logback-spring</contextName>
+<!--    <contextName>logback-spring</contextName>-->
 
     <!-- 配置日志文件保存位置 -->
     <!-- 方式一：直接本配置文件配置，name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“${}”来使用变量。 -->

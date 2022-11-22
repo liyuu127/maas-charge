@@ -2,13 +2,11 @@ package com.haylion.charge.auth.config;
 
 import com.haylion.charge.auth.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.haylion.charge.auth.authentication.mobile.SmsCodeFilter;
-import com.haylion.common.auth.handler.CustomLogoutSuccessHandler;
 import com.haylion.common.auth.handler.AuthExceptionEntryPoint;
 import com.haylion.common.auth.handler.CustomAccessDeniedHandler;
-import com.haylion.common.auth.token.CustomJwtAccessTokenConverter;
+import com.haylion.common.auth.handler.CustomLogoutSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,10 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -38,6 +32,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     private SmsCodeFilter smsCodeFilter;
     @Autowired
     private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
     /**
      * security的鉴权排除的url列表
      */
@@ -75,25 +70,5 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 
-    @Bean
-    public TokenStore
-    tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
-    }
-
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new CustomJwtAccessTokenConverter();
-        converter.setSigningKey("123");
-        return converter;
-    }
-
-    @Bean
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        return defaultTokenServices;
-
-    }
 
 }

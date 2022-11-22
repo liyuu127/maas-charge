@@ -1,0 +1,54 @@
+spring:
+  profiles:
+    active: ${charge_env:dev}
+  application:
+    name: charge-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.100.204:8848
+        file-extension: yml
+        # prefix: 文件名前缀，默认是spring.application.name
+        # 如果没有指定命令空间，则默认命令空间为PUBLIC
+        namespace: 41247855-8d70-4ce2-af63-46b0f802a656
+        # 如果没有配置Group，则默认值为DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        # 从Nacos读取配置项的超时时间
+        timeout: 5000
+        # 长轮训超时时间
+        config-long-poll-timeout: 1000
+        # 重试时间
+        config-retry-time: 100000
+        # 长轮训重试次数
+        max-retry: 3
+        # 开启监听和自动刷新
+        refresh-enabled: true
+        # Nacos的扩展配置项，数字越大优先级越高
+        enable-remote-sync-config: true
+#        extension-configs:
+#          - dataId: redis-config.yml
+#            group: EXT_GROUP
+#            refresh: true
+#          - dataId: mysql-config.yml
+#            group: EXT_GROUP
+#            refresh: true
+  config:
+    import:
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yml # 监听 DEFAULT_GROUP:test.yml
+      - optional:nacos:mysql-config.yml?group=EXT_GROUP # 覆盖默认 group, 监听 mysql-config.yml
+      - optional:nacos:redis-config.yml?group=EXT_GROUP # 覆盖默认 group, 监听 redis-config.yml
+    #      - optional:nacos:test02.yml?group=group_02&refreshEnabled=false # 不开启动态刷新
+    #      - nacos:test03.yml # 在拉取nacos配置异常时会快速失败, 会导致 spring 容器启动失败
+    #        file-extension: yml
+    #  profiles:
+    #    active: ${charge_env:dev}
+log:
+  path: ../log
+  moduleName: ${spring.application.name}
+  level: debug
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.haylion: debug
+    com.haylion.common.repository.mapper: debug
+    com.haylion.common.log.client: info

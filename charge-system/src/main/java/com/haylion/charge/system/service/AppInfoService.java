@@ -37,9 +37,9 @@ public class AppInfoService {
     private AppInfoMapper appInfoMapper;
     @Autowired
     private UploadService uploadService;
-    @Value("${charge.oss.user-app-path}")
+    @Value("${mc.oss.user-app-path}")
     private String userAppPath;
-    @Value("${charge.oss.maintenance-app-path}")
+    @Value("${mc.oss.maintenance-app-path}")
     private String maintenanceAppPath;
 
     public void addAppInfo(AppInfoForm appInfoForm) {

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.haylion.charge.common.sms.OssAutoConfiguration
+    com.haylion.common.sms.SmsAutoConfiguration

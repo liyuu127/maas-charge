@@ -25,7 +25,7 @@ public class UploadService {
 
     @Autowired
     OssClient aliyunClientImpl;
-    @Value("${charge.oss.bucketName}")
+    @Value("${mc.oss.bucketName}")
     String bucketName;
 
 
