@@ -4,22 +4,23 @@ package com.haylion.charge.user.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Objects;
-import com.haylion.common.entity.dto.UserDetailDto;
-import com.haylion.common.entity.entity.CompanyT;
-import com.haylion.common.entity.entity.UserT;
-import com.haylion.common.entity.vo.UserPermissionVo;
-import com.haylion.common.auth.util.SecurityUtil;
-import com.haylion.common.core.constant.CommonConstant;
-import com.haylion.common.core.constant.SecurityConstant;
-import com.haylion.common.core.exception.ApplicationException;
-import com.haylion.common.repository.mapper.CompanyTMapper;
-import com.haylion.common.repository.mapper.UserTMapper;
 import com.haylion.charge.user.constant.RetStubDetail;
 import com.haylion.charge.user.constant.UserConstant;
 import com.haylion.charge.user.pojo.form.UserForm;
 import com.haylion.charge.user.utils.RegexUtil;
 import com.haylion.charge.user.utils.WebUtil;
 import com.haylion.charge.user.utils.convert.UserConvert;
+import com.haylion.common.auth.util.SecurityUtil;
+import com.haylion.common.core.constant.CommonConstant;
+import com.haylion.common.core.constant.SecurityConstant;
+import com.haylion.common.core.exception.ApplicationException;
+import com.haylion.common.core.utils.HttpRequestDeviceUtils;
+import com.haylion.common.entity.dto.UserDetailDto;
+import com.haylion.common.entity.entity.RoleT;
+import com.haylion.common.entity.entity.UserT;
+import com.haylion.common.entity.vo.UserPermissionVo;
+import com.haylion.common.repository.mapper.UserTMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,22 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.haylion.charge.user.constant.RetStubDetail.OLD_PASSWORD_ERROR;
+import static com.haylion.charge.user.constant.UserConstant.USER_TYPE_MOBILE;
+import static com.haylion.charge.user.constant.UserConstant.USER_TYPE_PC;
 import static com.haylion.common.core.constant.CommonConstant.BCRYPT_REGE;
 import static com.haylion.common.core.constant.RedisConstant.USER_VERIFICATION_CODE_PREFIX;
-import static com.haylion.charge.user.constant.RetStubDetail.OLD_PASSWORD_ERROR;
 
 /**
  * @author liyu
@@ -49,18 +55,17 @@ import static com.haylion.charge.user.constant.RetStubDetail.OLD_PASSWORD_ERROR;
  */
 @Service
 @Slf4j
+@AllArgsConstructor
 public class UserService {
-    @Autowired
-    UserTMapper userTMapper;
+    private final UserTMapper userTMapper;
+    private final StringRedisTemplate stringRedisTemplate;
+    private final TokenStore tokenStore;
 
-    @Autowired
-    UserRoleService userRoleService;
+    private final UserRoleService userRoleService;
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    private final TerminalUserService terminalUserService;
+    private final MerchantUserService merchantUserService;
 
-    @Autowired
-    private TokenStore tokenStore;
 
     /**
      * 通过用户名查询用户包括角色权限等
@@ -84,27 +89,34 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void insertUser(UserForm userForm) {
-        //判断登录名和手机号是否有重复
-        if (userTMapper.selectByLowerUsernameOrMobile(null, userForm.getMobile()).isPresent()) {
-            throw new ApplicationException(RetStubDetail.TEL_EXIST);
-        }
-        if (userTMapper.selectByLowerUsernameOrMobile(userForm.getUsername(), null).isPresent()) {
-            throw new ApplicationException(RetStubDetail.USERNAME_EXIST);
-        }
+        checkUserUniqueField(userForm);
 
         //初始化用户信息
         var userT = UserConvert.INSTANCE.formToEntity(userForm);
-        String password = StringUtils.isBlank(userForm.getPassword()) ? userT.getMobile().substring(5, 11) : userForm.getPassword();
-        userT.setPassword(new BCryptPasswordEncoder().encode(password))
-                .setState(SecurityConstant.USER_STATE_PENDING_AUDIT)
-                .setCreateBy(SecurityUtil.getUsername())
-                .setCreateTime(LocalDateTime.now());
-        userTMapper.insertSelective(userT);
+        saveUser(userT);
+
+        //add business user
+        if (USER_TYPE_MOBILE == userForm.getUserType()) {
+            terminalUserService.insertTerminalUser(userForm);
+        } else if (USER_TYPE_PC == userForm.getUserType()) {
+            merchantUserService.insertMerchantUser(userForm);
+        }
+
         //添加角色信息
         if (userForm.getRoleId() != null && !Objects.equal(userForm.getRoleId(), UserConstant.USER_ROLE_NULL)) {
             userRoleService.insertUserRole(userT.getId(), userForm.getRoleId());
         }
     }
+
+    private void saveUser(UserT userT) {
+        String password = StringUtils.isBlank(userT.getPassword()) ? userT.getMobile().substring(5, 11) : userT.getPassword();
+        userT.setPassword(new BCryptPasswordEncoder().encode(password))
+                .setState(SecurityConstant.USER_STATE_PENDING_AUDIT)
+                .setCreateBy(SecurityUtil.getUsername())
+                .setCreateTime(LocalDateTime.now());
+        userTMapper.insertSelective(userT);
+    }
+
 
     /**
      * 逻辑删除用户
@@ -129,23 +141,7 @@ public class UserService {
             throw new ApplicationException(RetStubDetail.USER_NOUT_FOUND);
         }
         //查询修改后的手机或用户名是否相同
-        if (StringUtils.isNotBlank(userForm.getMobile())) {
-            userTMapper.selectByLowerUsernameOrMobile(null, userForm.getMobile())
-                    .ifPresent(userT -> {
-                        if (!userT.getId().equals(userForm.getId())) {
-                            throw new ApplicationException(RetStubDetail.TEL_EXIST);
-                        }
-                    });
-        }
-
-        if (StringUtils.isNotBlank(userForm.getUsername())) {
-            userTMapper.selectByLowerUsernameOrMobile(userForm.getUsername(), null)
-                    .ifPresent(userT -> {
-                        if (!userT.getId().equals(userForm.getId())) {
-                            throw new ApplicationException(RetStubDetail.USERNAME_EXIST);
-                        }
-                    });
-        }
+        checkUserUniqueField(userForm);
         //更新用户信息
         var userT = UserConvert.INSTANCE.formToEntity(userForm);
         userT.setUpdateTime(LocalDateTime.now())
@@ -158,6 +154,26 @@ public class UserService {
             userRoleService.updateUserRole(userForm.getId(), userForm.getRoleId());
         }
 
+    }
+
+    private void checkUserUniqueField(UserForm userForm) {
+        if (StringUtils.isNotBlank(userForm.getMobile())) {
+            userTMapper.selectByLowerUsernameOrMobileWithUserType(null, userForm.getMobile(), userForm.getUserType())
+                    .ifPresent(userT -> {
+                        if (userForm.getId() != null && !userT.getId().equals(userForm.getId())) {
+                            throw new ApplicationException(RetStubDetail.TEL_EXIST);
+                        }
+                    });
+        }
+
+        if (StringUtils.isNotBlank(userForm.getUsername())) {
+            userTMapper.selectByLowerUsernameOrMobileWithUserType(userForm.getUsername(), null, userForm.getUserType())
+                    .ifPresent(userT -> {
+                        if (userForm.getId() != null && !userT.getId().equals(userForm.getId())) {
+                            throw new ApplicationException(RetStubDetail.USERNAME_EXIST);
+                        }
+                    });
+        }
     }
 
     public UserDetailDto info(Integer userId) {
@@ -224,14 +240,14 @@ public class UserService {
         return userTMapper.selectUserExitByPId(pId);
     }
 
-    public UserPermissionVo selectLoginInfo(String username) {
+    public UserPermissionVo selectLoginInfo(String username, Integer userType) {
         Optional<UserT> userTOptional;
         if (RegexUtil.isMobileNumber(username)) {
             log.info("{}通过手机号登录", username);
-            userTOptional = userTMapper.selectByLowerUsernameOrMobile(null, username);
+            userTOptional = userTMapper.selectByLowerUsernameOrMobileWithUserType(null, username, userType);
         } else {
             log.info("{}通过用户名登录", username);
-            userTOptional = userTMapper.selectByLowerUsernameOrMobile(username, null);
+            userTOptional = userTMapper.selectByLowerUsernameOrMobileWithUserType(username, null, userType);
         }
         UserT userT = userTOptional.orElseThrow(() -> new UsernameNotFoundException("登录用户：" + username + " 不存在"));
         return populateUserPermissionVo(userT);
@@ -250,13 +266,39 @@ public class UserService {
 
     public void logout() {
         HttpServletRequest request = WebUtil.getCurrentRequest();
-        System.out.println("request = " + request);
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
-            System.out.println("authHeader = " + authHeader);
             String tokenValue = authHeader.replace("Bearer", "").trim();
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
             tokenStore.removeAccessToken(accessToken);
         }
     }
+
+
+    private Integer getUserTypeFromRequestAgent() {
+        Integer userType = null;
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        HttpRequestDeviceUtils.Device device = HttpRequestDeviceUtils.parseDevice(request);
+        if (device == HttpRequestDeviceUtils.Device.PC) {
+            userType = SecurityConstant.USER_TYPE_PC;
+        } else if (device == HttpRequestDeviceUtils.Device.MOBILE) {
+            userType = SecurityConstant.USER_TYPE_MOBILE;
+        }
+        return userType;
+    }
+
+    public UserT getUserById(Integer userId) {
+        if (userId == null) {
+            return null;
+        }
+        return userTMapper.selectByPrimaryKey(userId);
+    }
+
+    public List<String> getAuthoritiesByUserId(Integer userId) {
+        if (userId == null) {
+            return null;
+        }
+        return userTMapper.selectResourceCodeByUserId(userId);
+    }
+
 }

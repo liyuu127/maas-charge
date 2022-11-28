@@ -1,5 +1,7 @@
 package com.haylion.common.entity.dto;
 
+import com.haylion.common.entity.entity.ChargeMerchantUser;
+import com.haylion.common.entity.entity.ChargeTerminalUser;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

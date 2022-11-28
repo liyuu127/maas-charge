@@ -1,19 +1,17 @@
-package com.haylion.common.entity.entity;
+package com.haylion.common.repository.dto;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @author liyu
- * date 2022/4/8 15:04
+ * date 2022/11/28 10:38
  * description
  */
 @Data
-@Accessors(chain = true)
-public class UserT implements Serializable {
+public class TerminalUserListDto {
+
     /**
      * 员工信息表ID
      */
@@ -50,29 +48,10 @@ public class UserT implements Serializable {
     private String headIconUrl;
 
     /**
-     * 公司ID
-     */
-    private Integer cId;
-
-    /**
-     * 部门ID
-     */
-    private Integer dId;
-
-    /**
-     * 职位ID
-     */
-    private Integer pId;
-
-    /**
      * loginPermission
      */
     private Integer loginPermission;
 
-    /**
-     * 登陆密码
-     */
-    private String password;
 
     /**
      * 状态
@@ -102,13 +81,19 @@ public class UserT implements Serializable {
      */
     private String remark;
 
-    /**
-     * 是否删除 0未删除 1 已删除
-     */
-    private Integer deleted;
-
     private Integer userType;
+
     private LocalDateTime lastLoginTime;
 
-    private static final long serialVersionUID = 1L;
+    private LocalDateTime applyTime;
+
+    /**
+     * 申请渠道：{1:安卓app,2:IOSAPP,3:微信小程序,4:支付宝小程序}
+     */
+    private Integer applyChannel;
+
+    /**
+     * 账户状态：{1:正常，2:欠费}
+     */
+    private Integer terminalUserStatus;
 }

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.ChargeMerchantUserMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.ChargeMerchantUser">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, user_id, merchant_id, deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant_user
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchantUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant_user (user_id, merchant_id, deleted)
+        values (#{userId}, #{merchantId}, #{deleted})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchantUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="merchantId != null">
+                merchant_id,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="merchantId != null">
+                #{merchantId},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.ChargeMerchantUser">
+        <!--@mbg.generated-->
+        update charge_merchant_user
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.ChargeMerchantUser">
+        <!--@mbg.generated-->
+        update charge_merchant_user
+        set user_id = #{userId},
+        merchant_id = #{merchantId},
+        deleted = #{deleted}
+        where id = #{id}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update charge_merchant_user
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="user_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.userId}
+                </foreach>
+            </trim>
+            <trim prefix="merchant_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.merchantId}
+                </foreach>
+            </trim>
+            <trim prefix="deleted = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.deleted}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant_user
+        (user_id, merchant_id, deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId}, #{item.merchantId}, #{item.deleted})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchantUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            user_id,
+            merchant_id,
+            deleted,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            #{userId},
+            #{merchantId},
+            #{deleted},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            user_id = #{userId},
+            merchant_id = #{merchantId},
+            deleted = #{deleted},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchantUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="merchantId != null">
+                merchant_id,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="merchantId != null">
+                #{merchantId},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectListUser" resultType="com.haylion.common.repository.dto.MerchantUserListDto">
+        select
+        u.id as id,
+        u.name as name,
+        u.username as username,
+        u.mobile as mobile,
+        u.email as email,
+        u.card as card,
+        u.head_icon_url as headIconUrl,
+        u.login_permission as loginPermission,
+        u.state as state,
+        u.create_time as createTime,
+        u.create_by as createBy,
+        u.update_time as updateTime,
+        u.update_by as updateBy,
+        u.password_modified as passwordModified,
+        u.message_state as messageState,
+        u.user_type as userType,
+        u.last_login_time as lastLoginTime,
+        u.remark as remark,
+        cm.name as merchantName,
+        r.name as roleName
+        from charge_merchant_user as cmu
+        left join charge_merchant as cm on cm.id = cmu.merchant_id
+        left join user_t as u on u.id = cmu.user_id
+        left join user_role_t as ur on ur.user_id = u.id
+        left join role_t as r on r.id = ur.role_id
+
+        <where>
+            <if test="name != null and name != ''">
+                and u.name like concat('%',#{name} ,'%')
+            </if>
+            <if test="username != null and username != ''">
+                and u.username like concat('%',#{username} ,'%')
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and u.mobile like concat('%',#{mobile} ,'%')
+            </if>
+            <if test="states != null and states.length != 0">
+                and u.state in
+                <foreach collection="states" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="card != null and card != ''">
+                and u.card = #{card}
+            </if>
+            and u.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+            and cm.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+            and cm.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+
+    </select>
+    <select id="selectExistByMerchantId" resultType="boolean">
+        SELECT  IFNULL((select 1
+        from charge_merchant_user as cmu
+        where cmu.merchant_id = #{merchantId}
+        and cmu.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        limit 1),0)
+  </select>
+    <select id="selectOneByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant_user
+        where user_id = #{userId}
+    </select>
+</mapper>

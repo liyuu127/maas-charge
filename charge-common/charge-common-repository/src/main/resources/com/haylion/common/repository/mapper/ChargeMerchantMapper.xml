@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haylion.common.repository.mapper.ChargeMerchantMapper">
+    <resultMap id="BaseResultMap" type="com.haylion.common.entity.entity.ChargeMerchant">
+        <!--@mbg.generated-->
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="mobile" property="mobile"/>
+        <result column="legal_representative" property="legalRepresentative"/>
+        <result column="business_licence_number" property="businessLicenceNumber"/>
+        <result column="bank_name" property="bankName"/>
+        <result column="bank_account" property="bankAccount"/>
+        <result column="bank_account_number" property="bankAccountNumber"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, code, `name`, `type`, mobile, legal_representative, business_licence_number,
+        bank_name, bank_account, bank_account_number, remark, create_time, create_user, update_time,
+        update_user, deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.haylion.common.entity.entity.ChargeMerchant"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant (code, `name`, `type`, mobile, legal_representative, business_licence_number,
+        bank_name, bank_account, bank_account_number, remark, create_time, create_user,
+        update_time, update_user, deleted)
+        values (#{code}, #{name}, #{type}, #{mobile}, #{legalRepresentative}, #{businessLicenceNumber},
+        #{bankName}, #{bankAccount}, #{bankAccountNumber}, #{remark}, #{createTime}, #{createUser},
+        #{updateTime}, #{updateUser}, #{deleted})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchant" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">
+                code,
+            </if>
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile,
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                legal_representative,
+            </if>
+            <if test="businessLicenceNumber != null and businessLicenceNumber != ''">
+                business_licence_number,
+            </if>
+            <if test="bankName != null and bankName != ''">
+                bank_name,
+            </if>
+            <if test="bankAccount != null and bankAccount != ''">
+                bank_account,
+            </if>
+            <if test="bankAccountNumber != null and bankAccountNumber != ''">
+                bank_account_number,
+            </if>
+            <if test="remark != null and remark != ''">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">
+                #{code},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                #{mobile},
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                #{legalRepresentative},
+            </if>
+            <if test="businessLicenceNumber != null and businessLicenceNumber != ''">
+                #{businessLicenceNumber},
+            </if>
+            <if test="bankName != null and bankName != ''">
+                #{bankName},
+            </if>
+            <if test="bankAccount != null and bankAccount != ''">
+                #{bankAccount},
+            </if>
+            <if test="bankAccountNumber != null and bankAccountNumber != ''">
+                #{bankAccountNumber},
+            </if>
+            <if test="remark != null and remark != ''">
+                #{remark},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                #{createUser},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                #{updateUser},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.haylion.common.entity.entity.ChargeMerchant">
+        <!--@mbg.generated-->
+        update charge_merchant
+        <set>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                legal_representative = #{legalRepresentative},
+            </if>
+            <if test="businessLicenceNumber != null and businessLicenceNumber != ''">
+                business_licence_number = #{businessLicenceNumber},
+            </if>
+            <if test="bankName != null and bankName != ''">
+                bank_name = #{bankName},
+            </if>
+            <if test="bankAccount != null and bankAccount != ''">
+                bank_account = #{bankAccount},
+            </if>
+            <if test="bankAccountNumber != null and bankAccountNumber != ''">
+                bank_account_number = #{bankAccountNumber},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.ChargeMerchant">
+        <!--@mbg.generated-->
+        update charge_merchant
+        set code = #{code},
+        `name` = #{name},
+        `type` = #{type},
+        mobile = #{mobile},
+        legal_representative = #{legalRepresentative},
+        business_licence_number = #{businessLicenceNumber},
+        bank_name = #{bankName},
+        bank_account = #{bankAccount},
+        bank_account_number = #{bankAccountNumber},
+        remark = #{remark},
+        create_time = #{createTime},
+        create_user = #{createUser},
+        update_time = #{updateTime},
+        update_user = #{updateUser},
+        deleted = #{deleted}
+        where id = #{id}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update charge_merchant
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.code}
+                </foreach>
+            </trim>
+            <trim prefix="`name` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.name}
+                </foreach>
+            </trim>
+            <trim prefix="`type` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.type}
+                </foreach>
+            </trim>
+            <trim prefix="mobile = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.mobile}
+                </foreach>
+            </trim>
+            <trim prefix="legal_representative = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.legalRepresentative}
+                </foreach>
+            </trim>
+            <trim prefix="business_licence_number = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.businessLicenceNumber}
+                </foreach>
+            </trim>
+            <trim prefix="bank_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.bankName}
+                </foreach>
+            </trim>
+            <trim prefix="bank_account = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.bankAccount}
+                </foreach>
+            </trim>
+            <trim prefix="bank_account_number = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.bankAccountNumber}
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.remark}
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.createTime}
+                </foreach>
+            </trim>
+            <trim prefix="create_user = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.createUser}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.updateTime}
+                </foreach>
+            </trim>
+            <trim prefix="update_user = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.updateUser}
+                </foreach>
+            </trim>
+            <trim prefix="deleted = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id} then #{item.deleted}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant
+        (code, `name`, `type`, mobile, legal_representative, business_licence_number, bank_name,
+        bank_account, bank_account_number, remark, create_time, create_user, update_time,
+        update_user, deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.code}, #{item.name}, #{item.type}, #{item.mobile}, #{item.legalRepresentative},
+            #{item.businessLicenceNumber}, #{item.bankName}, #{item.bankAccount}, #{item.bankAccountNumber},
+            #{item.remark}, #{item.createTime}, #{item.createUser}, #{item.updateTime}, #{item.updateUser},
+            #{item.deleted})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchant" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            code,
+            `name`,
+            `type`,
+            mobile,
+            legal_representative,
+            business_licence_number,
+            bank_name,
+            bank_account,
+            bank_account_number,
+            remark,
+            create_time,
+            create_user,
+            update_time,
+            update_user,
+            deleted,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            #{code},
+            #{name},
+            #{type},
+            #{mobile},
+            #{legalRepresentative},
+            #{businessLicenceNumber},
+            #{bankName},
+            #{bankAccount},
+            #{bankAccountNumber},
+            #{remark},
+            #{createTime},
+            #{createUser},
+            #{updateTime},
+            #{updateUser},
+            #{deleted},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            code = #{code},
+            `name` = #{name},
+            `type` = #{type},
+            mobile = #{mobile},
+            legal_representative = #{legalRepresentative},
+            business_licence_number = #{businessLicenceNumber},
+            bank_name = #{bankName},
+            bank_account = #{bankAccount},
+            bank_account_number = #{bankAccountNumber},
+            remark = #{remark},
+            create_time = #{createTime},
+            create_user = #{createUser},
+            update_time = #{updateTime},
+            update_user = #{updateUser},
+            deleted = #{deleted},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.haylion.common.entity.entity.ChargeMerchant" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into charge_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="legalRepresentative != null">
+                legal_representative,
+            </if>
+            <if test="businessLicenceNumber != null">
+                business_licence_number,
+            </if>
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="bankAccount != null">
+                bank_account,
+            </if>
+            <if test="bankAccountNumber != null">
+                bank_account_number,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="legalRepresentative != null">
+                #{legalRepresentative},
+            </if>
+            <if test="businessLicenceNumber != null">
+                #{businessLicenceNumber},
+            </if>
+            <if test="bankName != null">
+                #{bankName},
+            </if>
+            <if test="bankAccount != null">
+                #{bankAccount},
+            </if>
+            <if test="bankAccountNumber != null">
+                #{bankAccountNumber},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createUser != null">
+                #{createUser},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="legalRepresentative != null">
+                legal_representative = #{legalRepresentative},
+            </if>
+            <if test="businessLicenceNumber != null">
+                business_licence_number = #{businessLicenceNumber},
+            </if>
+            <if test="bankName != null">
+                bank_name = #{bankName},
+            </if>
+            <if test="bankAccount != null">
+                bank_account = #{bankAccount},
+            </if>
+            <if test="bankAccountNumber != null">
+                bank_account_number = #{bankAccountNumber},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant
+        <where>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+    </select>
+    <select id="selectByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant
+        <where>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+    </select>
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from charge_merchant
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+
+            <if test="code != null and code != ''">
+                and code like concat('%',#{code} ,'%')
+            </if>
+
+            <if test="types != null and types.length != 0">
+                and type in
+                <foreach collection="types" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            and deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
+        </where>
+        order by create_time desc
+    </select>
+</mapper>

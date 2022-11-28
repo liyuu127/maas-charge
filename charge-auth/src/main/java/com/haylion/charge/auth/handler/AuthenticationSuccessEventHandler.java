@@ -23,6 +23,7 @@ public class AuthenticationSuccessEventHandler implements ApplicationListener<Au
             Object principal = authentication.getPrincipal();
             if (principal instanceof SecurityUser) {
                 log.info("用户：{} 登录成功", ((SecurityUser) principal).getUsername());
+                //todo update login time
             }
         }
     }

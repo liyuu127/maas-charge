@@ -32,7 +32,16 @@ public interface UserTMapper {
 
     Set<String> selectRoleCodesByUserId(@Param("userId") Integer userId);
 
-    Optional<UserT> selectByLowerUsernameOrMobile(@Param("username") String username, @Param("mobile") String mobile);
+    /**
+     * search one user
+     * @param username
+     * @param mobile
+     * @param userType
+     * @return
+     */
+    Optional<UserT> selectByLowerUsernameOrMobileWithUserType(@Param("username") String username,
+                                                              @Param("mobile") String mobile,
+                                                              @Param("userType") Integer userType);
 
     UserDetailDto getUserDetail(@Param("userId") Integer userId);
 
@@ -44,6 +53,7 @@ public interface UserTMapper {
                                    @Param("cId") Integer cId,
                                    @Param("dId") Integer dId,
                                    @Param("pId") Integer pId);
+
     Integer updatePassword(@Param("id") Integer id,
                            @Param("password") String password);
 

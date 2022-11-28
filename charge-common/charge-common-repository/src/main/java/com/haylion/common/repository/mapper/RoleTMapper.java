@@ -32,4 +32,6 @@ public interface RoleTMapper {
     RoleT selectByNameOrCode(@Param("name") String name, @Param("code") String code);
 
     void deleteById(Integer id);
+
+    List<RoleT> selectRoleListByUserId(@Param("userId") Integer userId);
 }

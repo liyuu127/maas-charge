@@ -241,4 +241,24 @@
         from role_t
         where id = #{id}
     </delete>
+    <select id="selectRoleListByUserId" resultMap="BaseResultMap">
+        select
+        r.id as id ,
+        r.name as name,
+        r.code as code,
+        r.description as description,
+        r.icon as icon,
+        r.color as color,
+        r.create_time as createTime,
+        r.create_by as createBy,
+        r.update_time as updateTime,
+        r.update_by as updateBy
+        from role_t as r
+        left join user_role_t as ur on ur.role_id = r.id
+        <where>
+            <if test="userId != null">
+                and ur.user_id = #{userId}
+            </if>
+        </where>
+    </select>
 </mapper>

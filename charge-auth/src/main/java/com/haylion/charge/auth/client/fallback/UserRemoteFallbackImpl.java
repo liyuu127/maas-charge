@@ -24,7 +24,7 @@ public class UserRemoteFallbackImpl implements UserRemoteClient {
     }
 
     @Override
-    public ResponseData selectLoginInfo(String username) {
+    public ResponseData selectLoginInfo(String username, Integer userType) {
         log.error("feign 调用失败{}", throwable.getLocalizedMessage());
         return ResponseData.fail(throwable.getLocalizedMessage());
     }

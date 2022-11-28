@@ -9,6 +9,9 @@ public class SecurityConstant {
     public static final String OAUTH_TOKEN_URL = "/oauth/token";
     public static final String MOBILE_LOGIN_URL = "/mobile/login";
 
+    public static final int USER_TYPE_MOBILE = 1;
+    public static final int USER_TYPE_PC = 2;
+
     public static final String PHONE_KEY = "mobile";
     public static final String CODE_KEY = "code";
     /**

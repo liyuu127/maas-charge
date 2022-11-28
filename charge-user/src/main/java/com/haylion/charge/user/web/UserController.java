@@ -1,6 +1,7 @@
 package com.haylion.charge.user.web;
 
 import com.github.pagehelper.PageInfo;
+import com.haylion.common.core.constant.SecurityConstant;
 import com.haylion.common.entity.dto.UserDetailDto;
 import com.haylion.common.entity.vo.UserPermissionVo;
 import com.haylion.common.auth.util.SecurityUtil;
@@ -85,12 +86,6 @@ public class UserController {
         userService.updateUserState(userForm.getId(), userForm.getState());
     }
 
-    @PostMapping("/state/freeze")
-    @SysOperateLog(description = "冻结人员信息")
-    public void freezeUser() {
-        userService.updateUserState(SecurityUtil.getUser().getUserId(), USER_STATE_FREEZE);
-    }
-
     @PostMapping("/logout")
     @SysOperateLog(description = "登出")
     public void logout() {
@@ -140,8 +135,9 @@ public class UserController {
 
     @SysOperateLog(description = "登录权限查询")
     @GetMapping("/login/info")
-    public UserPermissionVo selectLoginInfo(@RequestParam(value = "username", required = true) String username) {
-        return userService.selectLoginInfo(username);
+    public UserPermissionVo selectLoginInfo(@RequestParam(value = "username", required = true) String username,
+                                            @RequestParam(value = "userType", required = false) Integer userType) {
+        return userService.selectLoginInfo(username, userType);
     }
 
     @SysOperateLog(description = "密码重置")

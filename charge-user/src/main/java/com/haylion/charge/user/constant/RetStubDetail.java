@@ -21,6 +21,7 @@ public enum RetStubDetail implements RetStub {
     USER_NOUT_FOUND(100_018, "user_not_found"),
     COLOR_NAME_REPEAT(100_019, "color_name_repeat"),
     COMPANY_CODE_EXIST_ERROR(100_020, "company_supply_code_already_exist"),
+    MERCHANT_DELETE_ERROR(100_021, "user_with_merchant_not_null"),
 
     ;
     private static final String MODEL = "user";

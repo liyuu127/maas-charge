@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author liyu
@@ -79,4 +80,10 @@ public class RoleService {
         roleResourceService.deleteUserRole(roleId);
         userRoleService.deleteUserRoleByRoleId(roleId);
     }
-}
+
+    public List<RoleT> getRolesByUserId(Integer userId) {
+        if (userId == null) {
+            return null;
+        }
+        return roleTMapper.selectRoleListByUserId(userId);
+    }}

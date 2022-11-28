@@ -97,10 +97,24 @@ public class UserForm {
      */
     private Integer messageState;
 
-    /**
-     * for_rail_car
-     */
+
     private String remark;
 
+
+    /**
+     * 注册类型
+     */
+    @NotNull(message = "user type can not be null")
+    private Integer userType;
+
+    /**
+     * 申请渠道：{1:安卓app,2:IOSAPP,3:微信小程序,4:支付宝小程序}
+     */
+    private Integer applyChannel;
+
+    /**
+     * 商户id
+     */
+    private Integer merchantId;
 
 }

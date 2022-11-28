@@ -2,6 +2,8 @@ package com.haylion.charge.auth.security;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.haylion.common.core.constant.SecurityConstant;
+import com.haylion.common.core.utils.HttpRequestDeviceUtils;
 import com.haylion.common.entity.entity.UserT;
 import com.haylion.common.entity.vo.UserPermissionVo;
 import com.haylion.charge.auth.client.UserRemoteClient;
@@ -16,7 +18,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedCredentialsNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Set;
 
@@ -39,16 +44,30 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ResponseData responseData = userRemoteClient.selectLoginInfo(username);
 
+        Integer userTypeFromRequestAgent = getUserTypeFromRequestAgent();
+        ResponseData responseData = userRemoteClient.selectLoginInfo(username, userTypeFromRequestAgent);
+
+        log.info("username={}正在登录, userTypeFromRequestAgent={}", username, userTypeFromRequestAgent);
         if (!responseData.assertSuccess() || responseData.getData() == null) {
             log.info("登录用户：" + username + " 不存在.");
             throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
         }
         UserPermissionVo userPermission = JSON.parseObject(JSONObject.toJSONString(responseData.getData()), UserPermissionVo.class);
         Collection<? extends GrantedAuthority> authorities = getGrantedAuthorities(userPermission);
-        SecurityUser securityUser = getSecurityUser(userPermission.getUserT(), authorities);
-        return securityUser;
+        return getSecurityUser(userPermission.getUserT(), authorities);
+    }
+
+    private Integer getUserTypeFromRequestAgent() {
+        Integer userType = null;
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        HttpRequestDeviceUtils.Device device = HttpRequestDeviceUtils.parseDevice(request);
+        if (device == HttpRequestDeviceUtils.Device.PC) {
+            userType = SecurityConstant.USER_TYPE_PC;
+        } else if (device == HttpRequestDeviceUtils.Device.MOBILE) {
+            userType = SecurityConstant.USER_TYPE_MOBILE;
+        }
+        return userType;
     }
 
     private Collection<? extends GrantedAuthority> getGrantedAuthorities(UserPermissionVo userPermission) {

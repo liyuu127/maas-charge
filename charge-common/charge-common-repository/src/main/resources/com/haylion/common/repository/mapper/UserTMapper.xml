@@ -22,13 +22,15 @@
         <result column="update_by" property="updateBy"/>
         <result column="password_modified" property="passwordModified"/>
         <result column="message_state" property="messageState"/>
+        <result column="user_type" property="userType"/>
+        <result column="last_login_time" property="lastLoginTime"/>
         <result column="remark" property="remark"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, `name`, username, mobile, email, card, head_icon_url, c_id, d_id, p_id, login_permission,
     `password`, `state`, create_time, create_by, update_time, update_by, password_modified, 
-    message_state, remark, deleted
+    message_state, user_type, last_login_time, remark, deleted
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -40,11 +42,13 @@
             useGeneratedKeys="true">
     insert into user_t (`name`, username, mobile, email, card, head_icon_url, c_id,
       d_id, p_id, login_permission, `password`, `state`, create_time, create_by, 
-      update_time, update_by, password_modified, message_state, remark, deleted
+      update_time, update_by, password_modified, message_state, user_type, last_login_time,
+       remark, deleted
       )
     values (#{name}, #{username}, #{mobile}, #{email}, #{card}, #{headIconUrl}, #{cId}, 
       #{dId}, #{pId}, #{loginPermission}, #{password}, #{state}, #{createTime}, #{createBy}, 
-      #{updateTime}, #{updateBy}, #{passwordModified}, #{messageState}, #{remark}, #{deleted}
+      #{updateTime}, #{updateBy}, #{passwordModified}, #{messageState}, #{userType}, #{lastLoginTime},
+       #{remark}, #{deleted}
       )
   </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
@@ -104,6 +108,12 @@
             </if>
             <if test="messageState != null">
                 message_state,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
             </if>
             <if test="remark != null and remark != ''">
                 remark,
@@ -166,6 +176,12 @@
             </if>
             <if test="messageState != null">
                 #{messageState},
+            </if>
+            <if test="userType != null">
+                #{userType},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime},
             </if>
             <if test="remark != null and remark != ''">
                 #{remark},
@@ -233,6 +249,12 @@
             <if test="messageState != null">
                 message_state = #{messageState},
             </if>
+            <if test="userType != null">
+                user_type = #{userType},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
             <if test="remark != null and remark != ''">
                 remark = #{remark},
             </if>
@@ -243,29 +265,31 @@
         where id = #{id}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.haylion.common.entity.entity.UserT">
-    update user_t
-    set `name` = #{name},
-      username = #{username},
-      mobile = #{mobile},
-      email = #{email},
-      card = #{card},
-      head_icon_url = #{headIconUrl},
-      c_id = #{cId},
-      d_id = #{dId},
-      p_id = #{pId},
-      login_permission = #{loginPermission},
-      `password` = #{password},
-      `state` = #{state},
-      create_time = #{createTime},
-      create_by = #{createBy},
-      update_time = #{updateTime},
-      update_by = #{updateBy},
-      password_modified = #{passwordModified},
-      message_state = #{messageState},
-      remark = #{remark},
-      deleted = #{deleted}
-    where id = #{id}
-  </update>
+        update user_t
+        set `name` = #{name},
+          username = #{username},
+          mobile = #{mobile},
+          email = #{email},
+          card = #{card},
+          head_icon_url = #{headIconUrl},
+          c_id = #{cId},
+          d_id = #{dId},
+          p_id = #{pId},
+          login_permission = #{loginPermission},
+          `password` = #{password},
+          `state` = #{state},
+          create_time = #{createTime},
+          create_by = #{createBy},
+          update_time = #{updateTime},
+          update_by = #{updateBy},
+          password_modified = #{passwordModified},
+          message_state = #{messageState},
+          user_type = #{userType},
+          last_login_time = #{lastLoginTime},
+          remark = #{remark},
+          deleted = #{deleted}
+        where id = #{id}
+     </update>
     <select id="selectByLowerUsername" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -287,7 +311,7 @@
         left join role_t as hrt on hrt.id = hurt.role_id
         where hurt.user_id = #{userId}
   </select>
-    <select id="selectByLowerUsernameOrMobile" resultMap="BaseResultMap">
+    <select id="selectByLowerUsernameOrMobileWithUserType" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user_t as hut
@@ -297,6 +321,9 @@
             </if>
             <if test="username != null and username != ''">
                 or hut.username = #{username}
+            </if>
+            <if test="userType != null">
+                and hut.user_type = #{userType}
             </if>
         </where>
         having hut.deleted = ${@com.haylion.common.core.constant.CommonConstant@DELETED_NO}
