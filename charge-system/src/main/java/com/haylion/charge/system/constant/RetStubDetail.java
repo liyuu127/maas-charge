@@ -10,6 +10,7 @@ public enum RetStubDetail implements RetStub {
     CODE_HAS_ALREADY_SEND(300_002, "verify_code_send_repeat"),
     SYS_INTERNATIONALIZATION_CODE_ALREADY_EXIST(300_003, "SysInternationalizationCodeAlreadyExist"),
     RUN_XXJJOB_ERROR(300_004, "run_xxjjob_error"),
+    AREA_NOT_EXIST(300_005,"DictItemNotExist"),
 
     ;
 
